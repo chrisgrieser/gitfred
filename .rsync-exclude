@@ -1,0 +1,17 @@
+.rsync-exclude
+.editorconfig
+.gitignore
+.git/
+.github/
+docs/
+assets/
+prefs.plist
+README.md
+LICENSE
+Makefile
+.build-and-release.sh
+
+# symlinks
+jxa-globals.d.ts
+jsconfig.json
+alfred.d.ts
