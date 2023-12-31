@@ -1,13 +1,37 @@
-# gitfred
+<!-- LTeX: enabled=false -->
+# GitFred
+<!-- LTeX: enabled=true -->
 ![Download count](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=Total%20Downloads&style=plastic)
 ![version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
 
-GitHub Assistant for Alfred
+GitHub Assistant for Alfred.
 
 - [ ] Showcase image to be inserted here.
 
 ## Usage
-- {{Do this}} via the keyword `xxx`.
+- Search all public GitHub repositories via the keyword `gh`.
+	+ <kbd>⏎</kbd>: Open the repo's GitHub page.
+	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
+	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
+	  issue in the browser.
+- Quick access the repositories you own via `gg`.
+	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
+	  Finder. Otherwise, open the repo's GitHub page.
+	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
+	+ <kbd>⌥⏎</kbd>: Copy the repo link.
+	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
+	  issue in the browser.
+- Open recent GitHub issues you are involved in with `ghi`.
+	+ <kbd>⏎</kbd>: Open the issue in the browser.
+	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
+- Access Pull Requests (PRs) you have opened with the keyword `gpr`.
+	+ <kbd>⏎</kbd>: Open the PR in the browser.
+	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
+- Directly open your GitHub notification via `gn`. (Requires that you export a
+  `$GITHUB_TOKEN` set in your `.zshenv`.)
+	+ <kbd>⏎</kbd>: Open the notification in the browser.
+	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
+	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
 
 ## Installation
 [➡️ Download the latest release.](./releases/latest)
