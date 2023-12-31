@@ -4,9 +4,13 @@
 ![Download count](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=Total%20Downloads&style=plastic)
 ![version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
 
-GitHub Assistant for Alfred.
+Helpful GitHub Assistant for Alfred.
 
-- [ ] Showcase image to be inserted here.
+<img alt="Showcase owned repo search" width=70% src="https://github.com/chrisgrieser/gitfred/assets/73286100/c6cf4e32-d20b-4438-b868-4ff64d349c35">
+
+<img alt="Showcase public repo search" width=70% src="https://github.com/chrisgrieser/gitfred/assets/73286100/c73f2245-6e56-45c5-998f-ab5b5f7512e5">
+
+<img alt="Showcase issue search" width=70% src="https://github.com/chrisgrieser/gitfred/assets/73286100/fe15a8a2-e0c4-493f-95ba-f41e3da7e8dc">
 
 ## Usage
 - Search all public GitHub repositories via the keyword `gh`.
