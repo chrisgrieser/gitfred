@@ -12,6 +12,8 @@ GitHub Assistant for Alfred.
 - Search all public GitHub repositories via the keyword `gh`.
 	+ <kbd>⏎</kbd>: Open the repo's GitHub page.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
+	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder. Optionally,
+	  creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
 	  issue in the browser.
 - Quick access the repositories you own via `gg`.
@@ -19,6 +21,7 @@ GitHub Assistant for Alfred.
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
 	+ <kbd>⌥⏎</kbd>: Copy the repo link.
+	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder.
 	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
 	  issue in the browser.
 - Open recent GitHub issues you are involved in with `ghi`.
