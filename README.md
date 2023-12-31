@@ -1,8 +1,8 @@
-# {{workflow-name}}
-![Download count](https://img.shields.io/github/downloads/chrisgrieser/{{workflow-id}}/total?label=Total%20Downloads&style=plastic)
-![version number](https://img.shields.io/github/v/release/chrisgrieser/{{workflow-id}}?label=Latest%20Release&style=plastic)
+# gitfred
+![Download count](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=Total%20Downloads&style=plastic)
+![version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
 
-{{workflow-description}}
+GitHub Assistant for Alfred
 
 - [ ] Showcase image to be inserted here.
 
