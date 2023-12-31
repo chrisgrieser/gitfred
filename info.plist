@@ -1333,13 +1333,13 @@
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
 - Quick access the repositories you own via `gg`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo link.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. If the repo is already locally available on your device, just open the repository in the Terminal.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
@@ -1347,15 +1347,18 @@
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `gn`. (Requires that you export a
-  `$GITHUB_TOKEN` set in your `.zshenv`.)
+- Directly open your GitHub notification via `gn`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
 
 ---
 
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+#### ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)
+
+---
+
+#### Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>06CC5118-3CAE-427B-928D-48B78C81B6B6</key>
@@ -1700,9 +1703,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Number of results. (Maximum 100, a high number takes longer to load.)</string>
 			<key>label</key>
-			<string>results in issue search</string>
+			<string>Issue Search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1721,9 +1724,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Folder where repositories should be cloned to.</string>
+			<string>Local folder where repositories should be cloned to.</string>
 			<key>label</key>
-			<string>Local Repo Folder</string>
+			<string>Cloning</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -1737,12 +1740,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>fork when not owner</string>
 			</dict>
 			<key>description</key>
-			<string>When closing a repository that you are not the owner of, also create a fork an prepare the repo for e PR. (Requires the `gh` cli.)</string>
+			<string>When cloning a repository that you do not own, also create a fork an prepare the repo for e PR. (Requires the `gh` cli.)</string>
 			<key>label</key>
-			<string>Fork when cloning</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
