@@ -15,8 +15,8 @@ function alfredMatcher(str) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	const requestStr = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -71,13 +71,12 @@ function run() {
 		.map((/** @type {GithubRepo&{local: {path: string}}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
+			let subtitle = "";
 
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local
-				? "Open in Terminal"
-				: "Shallow Clone"
+			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone";
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
@@ -87,23 +86,10 @@ function run() {
 			}
 
 			// extra info
-			if (repo.archived) {
-				type += "🗄 ";
-				matcher += "archived ";
-			}
-			if (repo.fork) {
-				type += "🍴 ";
-				matcher += "fork ";
-			}
-			if (repo.is_template) {
-				type += "📄 ";
-				matcher += "template ";
-			}
-			if (repo.private) {
-				type += "🔒 ";
-				matcher += "private ";
-			}
-			let subtitle = "";
+			if (repo.fork) type += "🍴 ";
+			if (repo.fork) matcher += "fork ";
+			if (repo.is_template) type += "📄 ";
+			if (repo.is_template) matcher += "template ";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
@@ -120,7 +106,7 @@ function run() {
 						valid: Boolean(repo.local),
 					},
 					ctrl: {
-						subtitle: `⌃: ${terminalActionDesc}`,
+						subtitle: "⌃: " + terminalActionDesc,
 						arg: terminalArg,
 					},
 					alt: {

@@ -1,8 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -66,7 +66,9 @@ function run() {
 				repo,
 				comments.toString(),
 				`(${humanRelativeDate(item.created_at)})`,
-			].filter(Boolean).join("   ");
+			]
+				.filter(Boolean)
+				.join("   ");
 
 			return {
 				title: draftIcon + title,
