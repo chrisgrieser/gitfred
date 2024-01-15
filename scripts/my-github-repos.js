@@ -27,7 +27,6 @@ function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
-	const includeArchived = false;
 
 	// determine local repos
 	const localRepos = {};
@@ -54,7 +53,7 @@ function run() {
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
-		.filter((/** @type {GithubRepo} */ repo) => includeArchived || !repo.archived)
+		.filter((/** @type {GithubRepo} */ repo) => !repo.archived)
 		.sort(
 			(
 				/** @type {GithubRepo&{isLocal: boolean}} */ a,
@@ -64,12 +63,8 @@ function run() {
 				b.isLocal = localRepos[b.name];
 				if (a.isLocal && !b.isLocal) return -1;
 				if (!a.isLocal && b.isLocal) return 1;
-
 				if (a.fork && !b.fork) return 1;
 				if (!a.fork && b.fork) return -1;
-
-				if (a.archived && !b.archived) return 1;
-				if (!a.archived && b.archived) return -1;
 				return b.stargazers_count - a.stargazers_count;
 			},
 		)
