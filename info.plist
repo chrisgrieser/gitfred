@@ -1755,7 +1755,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>2</string>
+				<string>5</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1771,6 +1771,25 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>clone_depth</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>restore mtime</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>restore_mtime</string>
 		</dict>
 	</array>
 	<key>version</key>
