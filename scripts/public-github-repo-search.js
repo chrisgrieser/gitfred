@@ -1,21 +1,20 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	return [clean, str].join(" ") + " ";
+	const clean = str.replace(/[-_.]/g, " ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} url */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(
-		requestData,
-		$.NSUTF8StringEncoding,
-	).js;
-	return requestString;
+	const requestStr = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 /**
