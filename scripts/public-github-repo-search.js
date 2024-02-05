@@ -11,7 +11,10 @@ function alfredMatcher(str) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	const requestString = $.NSString.alloc.initWithDataEncoding(
+		requestData,
+		$.NSUTF8StringEncoding,
+	).js;
 	return requestString;
 }
 
@@ -96,6 +99,9 @@ function run(argv) {
 						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
 						arg: repo.full_name,
 					},
+					cmd: {
+						arg: repo.html_url + "/releases",
+					},
 					ctrl: {
 						subtitle: cloneSubtitle,
 					},
@@ -108,6 +114,12 @@ function run(argv) {
 			title: "🚫 No results",
 			subtitle: `No results found for '${query}'`,
 			valid: false,
+			mods: {
+				shift: { valid: false },
+				cmd: { valid: false },
+				alt: { valid: false },
+				ctrl: { valid: false },
+			},
 		});
 	}
 	return JSON.stringify({ items: repos });
