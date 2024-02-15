@@ -88,6 +88,8 @@ function run(argv) {
 
 			const cloneSubtitle = "⌃: Shallow Clone" + (forkOnClone ? " & Fork" : "");
 
+			const secondUrl = repo.homepage || repo.html_url + "/releases";
+
 			return {
 				title: repo.name,
 				subtitle: subtitle,
@@ -99,7 +101,8 @@ function run(argv) {
 						arg: repo.full_name,
 					},
 					cmd: {
-						arg: repo.html_url + "/releases",
+						arg: secondUrl,
+						subtitle: `⌘: Open  "${secondUrl}"`
 					},
 					ctrl: {
 						subtitle: cloneSubtitle,
