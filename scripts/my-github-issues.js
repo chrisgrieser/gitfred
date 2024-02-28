@@ -1,14 +1,14 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -51,5 +51,11 @@ function run() {
 			};
 		},
 	);
-	return JSON.stringify({ items: issues });
+	return JSON.stringify({
+		items: issues,
+		cache: {
+			seconds: 150, // fast to pick up recently created issues
+			loosereload: true,
+		},
+	});
 }

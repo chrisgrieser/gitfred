@@ -78,5 +78,11 @@ function run() {
 			};
 		},
 	);
-	return JSON.stringify({ items: openPrs });
+	return JSON.stringify({
+		items: openPrs,
+		cache: {
+			seconds: 150, // fast to pick up recently created prs
+			loosereload: true,
+		},
+	});
 }
