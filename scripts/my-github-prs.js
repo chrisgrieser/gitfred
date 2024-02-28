@@ -75,6 +75,7 @@ function run() {
 				subtitle: subtitle,
 				match: alfredMatcher(title) + alfredMatcher(repo),
 				arg: item.html_url,
+				quicklookurl: item.html_url,
 			};
 		},
 	);

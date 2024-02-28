@@ -48,6 +48,7 @@ function run() {
 				subtitle: `#${item.number}  ${repo}   ${comments}`,
 				match: matcher,
 				arg: item.html_url,
+				quicklookurl: item.html_url,
 			};
 		},
 	);
