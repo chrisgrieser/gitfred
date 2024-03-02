@@ -65,13 +65,16 @@ function run(argv) {
 		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 	}
 
+	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
+	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
+	const response = JSON.parse(httpRequest(apiURL));
+
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
-	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
 	/** @type {AlfredItem[]} */
-	const repos = JSON.parse(httpRequest(apiURL))
-		.items.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
+	const repos = response.items
+		.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {GithubRepo} */ repo) => {
 			// calculate relative date
 			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
@@ -83,7 +86,9 @@ function run(argv) {
 				"★ " + repo.stargazers_count,
 				lastUpdated,
 				repo.description,
-			].join("  ·  ");
+			]
+				.filter(Boolean)
+				.join("  ·  ");
 
 			const cloneSubtitle = "⌃: Shallow Clone " + depthInfo + (forkOnClone ? " & Fork" : "");
 			const secondUrl = repo.homepage || repo.html_url + "/releases";
@@ -110,6 +115,7 @@ function run(argv) {
 			};
 		});
 
+	// GUARD no results
 	if (repos.length === 0) {
 		repos.push({
 			title: "🚫 No results",
