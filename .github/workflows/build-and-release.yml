@@ -2,8 +2,7 @@ name: Build & Release Alfred Workflow
 
 on:
   push:
-    tags:
-      - "*"
+    tags: ["*"]
 
 env:
   WORKFLOW_NAME: ${{ github.event.repository.name }}

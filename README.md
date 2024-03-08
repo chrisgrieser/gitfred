@@ -21,8 +21,6 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder and open in the
 	  Terminal. Optionally, creates a fork on GitHub with the `gh` cli and
 	  prepares the repo for a PR.
-	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
-	  issue in the browser.
 - Quick access the repositories you own via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
@@ -30,9 +28,7 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌥⏎</kbd>: Copy the repo link.
 	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder and open in the
 	  Terminal. If the repo is already locally available on your device, just
-	  open the repository in the Terminal. 
-	+ <kbd>⇧⏎</kbd>: Search the last 100 issues, use <kbd>⏎</kbd> to open the
-	  issue in the browser.
+	  open the repository in the Terminal.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.

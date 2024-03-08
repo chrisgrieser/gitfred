@@ -17,7 +17,7 @@ plutil -replace version -string "$nextVersion" info.plist
 
 # #───────────────────────────────────────────────────────────────────────────────
 #
-# INFO specific to my setup: update version number in *local* info.plist 
+# INFO specific to my setup: update version number in *local* info.plist
 localInfoPlist="$HOME/.config/Alfred.alfredpreferences/workflows/$(basename "$PWD")/info.plist"
 if [[ -f "$localInfoPlist" ]]; then
 	plutil -replace version -string "$nextVersion" "$localInfoPlist"
@@ -37,5 +37,5 @@ git pull
 git push
 
 # trigger the release action via github action
-git tag "$nextVersion" 
+git tag "$nextVersion"
 git push origin --tags
