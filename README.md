@@ -46,7 +46,7 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
 
 ## Installation
-[➡️ Download the latest release.](./releases/latest)
+[➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
 
 When admitted to the Alfred Gallery, the workflow auto-updates via Alfred's
 workflow-update mechanism.
