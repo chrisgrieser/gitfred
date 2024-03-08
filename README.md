@@ -51,6 +51,8 @@ Helpful GitHub Assistant for Alfred.
 > only needed when cloned repos should also automatically be forked.
 
 ## Installation
+This workflow requires Alfred 5.5.
+
 [➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
 
 The workflow auto-updates via Alfred's workflow-update mechanism.
