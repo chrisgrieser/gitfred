@@ -122,6 +122,7 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
+	/** @type {Record<string, string>} */
 	const typeMaps = {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		PullRequest: "🟧",
@@ -134,6 +135,7 @@ function run() {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Release: "🎉",
 	};
+	/** @type {Record<string, string>} */
 	const reasonMaps = {
 		author: "👤",
 		mention: "⭕",
