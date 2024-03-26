@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
@@ -90,6 +89,15 @@ function run() {
 	]);
 	const responseObj = JSON.parse(response);
 
+	// GUARD error, for example invalid API token
+	if (responseObj.message) {
+		return JSON.stringify({
+			items: [
+				{ title: responseObj.message, subtitle: "Error", valid: false },
+			],
+		});
+	} 
+
 	// GUARD: no notifications
 	if (responseObj.length === 0) {
 		const deactivatedMods = {
@@ -111,6 +119,8 @@ function run() {
 			],
 		});
 	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	const typeMaps = {
 		// biome-ignore lint/style/useNamingConvention: not by me
