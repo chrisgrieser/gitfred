@@ -64,7 +64,7 @@ function humanRelativeDate(isoDateStr) {
 function run() {
 	const githubToken =
 		$.getenv("github_token_from_alfred_prefs") ||
-		app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN");
+		app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN").trim();
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 

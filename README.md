@@ -35,8 +35,9 @@ Helpful GitHub Assistant for Alfred.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
-- Directly open your GitHub notification via `ghn`. (Requires that you export a
-  `$GITHUB_TOKEN` set in your `.zshenv`.)
+- Directly open your GitHub notification via `ghn`.
+	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
+	  to notifications.
 	+ <kbd>⏎</kbd>: Open the notification in the browser.
 	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
 	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
