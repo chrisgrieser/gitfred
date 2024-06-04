@@ -62,24 +62,26 @@ function humanRelativeDate(isoDateStr) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const githubToken = app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN");
+	const githubToken =
+		$.getenv("github_token_from_alfred_prefs") ||
+		app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN");
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 
-	// GUARD: no github token
+	// GUARD
 	if (!githubToken) {
 		return JSON.stringify({
 			items: [
 				{
-					title: "! No $GITHUB_TOKEN found.",
-					subtitle: "Please export it in your `.zshenv`.",
+					title: "⚠️ No $GITHUB_TOKEN found.",
+					subtitle: "Neither the Workflow Configuration nor the `.zshenv` have a token.",
 					valid: false,
 				},
 			],
 		});
 	}
 
-	// CALL GITHUB API 
+	// CALL GITHUB API
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 	const parameter = showReadNotifs ? "?all=true" : "";
 	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
@@ -92,11 +94,9 @@ function run() {
 	// GUARD error, for example invalid API token
 	if (responseObj.message) {
 		return JSON.stringify({
-			items: [
-				{ title: responseObj.message, subtitle: "Error", valid: false },
-			],
+			items: [{ title: responseObj.message, subtitle: "Error", valid: false }],
 		});
-	} 
+	}
 
 	// GUARD: no notifications
 	if (responseObj.length === 0) {
