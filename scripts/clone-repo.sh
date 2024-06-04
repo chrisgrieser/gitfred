@@ -15,7 +15,7 @@ cd "$local_repo_folder" || return 1
 if [[ $clone_depth == "0" ]]; then
 	git clone "$url" --no-single-branch --no-tags # get branches, but not tags
 else
-	# WARN depth=2 ensures that amending a shallow commit does not result in a
+	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth == "1" ]] && clone_depth=2
 
@@ -39,9 +39,10 @@ if [[ "$restore_mtime" == "1" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# FORK ON CLONE (if owner)
+# FORK ON CLONE (if not owner)
 
-if [[ "$ownerOfRepo" != "1" && "$fork_on_clone" == "1" ]]; then
+# INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
+if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi
 
 	gh repo fork --remote=false
