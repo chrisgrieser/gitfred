@@ -22,6 +22,12 @@ else
 	git clone "$url" --depth="$clone_depth" --no-single-branch --no-tags
 fi
 
+success=$?
+if [[ $success -ne 0 ]]; then
+	echo "ERROR: git clone failed."
+	exit 1
+fi
+
 # Open in terminal via Alfred
 echo -n "$local_repo_folder/$reponame"
 
