@@ -21,7 +21,7 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder and open in the
 	  Terminal. Optionally, creates a fork on GitHub with the `gh` cli and
 	  prepares the repo for a PR.
-- Quick access the repositories you own via `gmy`.
+- Access public repositories you own via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
