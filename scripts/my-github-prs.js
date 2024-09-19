@@ -67,30 +67,27 @@ function run() {
 		});
 	}
 
-	const openPrs = JSON.parse(response).items.map(
-		(/** @type {GithubIssue} */ item) => {
-			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
-			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
-			const icon = item.draft ? "⬜" : "🟩 ";
+	const openPrs = JSON.parse(response).items.map((/** @type {GithubIssue} */ item) => {
+		const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
+		const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
+		const icon = item.draft ? "⬜" : "🟩 ";
 
-			const subtitle = [
-				`#${item.number}`,
-				repo,
-				comments.toString(),
-				`(${humanRelativeDate(item.created_at)})`,
-			]
-				.filter(Boolean)
-				.join("   ");
+		const components = [
+			`#${item.number}`,
+			repo,
+			comments.toString(),
+			`(${humanRelativeDate(item.created_at)})`,
+		];
+		const subtitle = components.filter(Boolean).join("   ");
 
-			return {
-				title: icon + item.title,
-				subtitle: subtitle,
-				match: alfredMatcher(item.title) + alfredMatcher(repo),
-				arg: item.html_url,
-				quicklookurl: item.html_url,
-			};
-		},
-	);
+		return {
+			title: icon + item.title,
+			subtitle: subtitle,
+			match: alfredMatcher(item.title) + alfredMatcher(repo),
+			arg: item.html_url,
+			quicklookurl: item.html_url,
+		};
+	});
 	return JSON.stringify({
 		items: openPrs,
 		cache: {
