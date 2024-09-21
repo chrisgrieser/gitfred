@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<array>
 			<dict>
@@ -42,6 +55,31 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>629A9B2E-2F56-4A05-9F68-527094D7BCA8</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -420,6 +458,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<array>
 			<dict>
@@ -583,6 +634,108 @@
 	<string>GitFred</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>C9F8D0A3-F933-4772-9CD2-E8B592A87029</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>allow_empty</key>
+					<true/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Current tab not a GitHub Page</string>
+				<key>title</key>
+				<string>⚠️ Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>.*github.com/.+?/.+</string>
+						<key>outputlabel</key>
+						<string>GitHub URL</string>
+						<key>uid</key>
+						<string>629A9B2E-2F56-4A05-9F68-527094D7BCA8</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>other/empty</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -1492,6 +1645,14 @@ end run</string>
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
+- Additionally, you can press the
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  GitHub repo from the current browser tab. ([Note that Firefox is not
+  supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
+
+&gt; To be as lightweight as possible, this workflow only requires a GitHub token
+&gt; when needed, that is for accessing notifications. The GitHub cli `gh` is also
+&gt; only needed when cloned repos should also automatically be forked.
 
 ---
 
@@ -1500,6 +1661,13 @@ end run</string>
 #### Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
+		<dict>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>06CC5118-3CAE-427B-928D-48B78C81B6B6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1528,6 +1696,13 @@ end run</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>640</real>
+		</dict>
+		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
+		<dict>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1700,6 +1875,13 @@ end run</string>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
+		<key>9AED849C-2F6C-4741-B375-875D5613781A</key>
+		<dict>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
 			<key>colorindex</key>
@@ -1750,6 +1932,16 @@ end run</string>
 			<real>710</real>
 			<key>ypos</key>
 			<real>850</real>
+		</dict>
+		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
+		<dict>
+			<key>note</key>
+			<string>DOUBLE-CLICK THIS
+to set a htokey to clone the repo in the frontmost browser tab</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<dict>
@@ -2032,7 +2224,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.5</string>
+	<string>1.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
