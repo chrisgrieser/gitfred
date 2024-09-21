@@ -10,6 +10,7 @@ README.md
 LICENSE
 Justfile
 .build-and-release.sh
+.markdownlint.yaml
 
 # symlinks
 jxa-globals.d.ts
