@@ -994,6 +994,14 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -1011,14 +1019,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>462691DA-0319-4F31-B297-CC4A75FD1DFE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1644,7 +1644,7 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>570</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
@@ -2055,7 +2055,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<string>setup remotes</string>
 			</dict>
 			<key>description</key>
-			<string>Point `upstream` to the source, and `origin` to the fork. This allows for quick PRs to the repo.</string>
+			<string>Point `upstream` to the source, and `origin` to the fork. This is useful for quick PRs.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
