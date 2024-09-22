@@ -18,17 +18,17 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌘⏎</kbd>: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
-	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder and open in the
-	  Terminal. Optionally, creates a fork on GitHub with the `gh` cli and
-	  prepares the repo for a PR.
+	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
+	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
+	  repo for a PR.
 - Access public repositories you own via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
 	+ <kbd>⌥⏎</kbd>: Copy the repo link.
-	+ <kbd>⌃⏎</kbd>: Shallow clone the repo to a local folder and open in the
-	  Terminal. If the repo is already locally available on your device, just
-	  open the repository in the Terminal.
+	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
+	  If the repo is already locally available on your device, just open the
+	  repository in the Terminal.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
@@ -45,11 +45,6 @@ Helpful GitHub Assistant for Alfred.
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
   GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
-
-> [!NOTE]
-> To be as lightweight as possible, this workflow only requires a GitHub token
-> when needed, that is for accessing notifications. The GitHub cli `gh` is also
-> only needed when cloned repos should also automatically be forked.
 
 ## Installation
 This workflow requires Alfred 5.5.

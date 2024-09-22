@@ -25,7 +25,7 @@ fi
 success=$?
 if [[ $success -ne 0 ]]; then
 	echo "ERROR: Clone failed. $msg"
-	exit 1
+	return 1
 fi
 
 # Open in terminal via Alfred
@@ -35,13 +35,12 @@ cd "$reponame" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# SWITCH TO WORKING BRANCH
-if [[ -n "$working_branch" ]]; then
+# POST CLONE ACTIONS
+if [[ -n "$branch_on_clone" ]]; then
 	# `git switch` fails silently if the branch does not exist
-	git switch "$working_branch" &> /dev/null
+	git switch "$branch_on_clone" &> /dev/null
 fi
 
-# RESTORE MTIME
 if [[ "$restore_mtime" == "1" ]]; then
 	# https://stackoverflow.com/a/36243002/22114136
 	git ls-tree -r -t --full-name --name-only HEAD | while read -r file; do
@@ -50,19 +49,27 @@ if [[ "$restore_mtime" == "1" ]]; then
 	done
 fi
 
-# FORK ON CLONE (if not owner)
+#───────────────────────────────────────────────────────────────────────────────
+# FORKING
+
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
 if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]] ||
 	[[ "$clonedViaHotkey" == "true" && "$fork_on_clone_via_hotkey" == "1" ]]; then
-	if [[ ! -x "$(command -v gh)" ]]; then echo "ERROR: \`gh\` not installed." && return 1; fi
+
+	if [[ ! -x "$(command -v gh)" ]]; then
+		echo "ERROR: \`gh\` not installed." 
+		return 1
+	fi
 
 	gh repo fork --remote=false
 
-	# origin -> my fork repo
-	# upstream -> the source repo
-	git remote rename origin upstream
-	git remote add origin "git@github.com:$github_username/$reponame.git"
-	gh repo set-default "$source_repo" # where `gh` sends PRs to
+	if [[ "$setup_remotes_on_fork" == "1" ]] ; then
+		git remote rename origin upstream
+		git remote add origin "git@github.com:$github_username/$reponame.git"
+		gh repo set-default "$source_repo" # where `gh` sends PRs to
+	fi
 
-	[[ -n "$default_branch" ]] && git switch --create "$default_branch"
+	if [[ -n "$branch_on_fork" ]] ; then 
+		git switch --create "$branch_on_fork"
+	fi
 fi
