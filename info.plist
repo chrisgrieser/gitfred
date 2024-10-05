@@ -456,49 +456,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open Homepage (or Releases)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Shallow Clone (and Fork)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<array/>
 		<key>F1ACCD95-5E8C-469E-AFD1-D184923540FB</key>
@@ -952,6 +909,14 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -994,14 +959,6 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -1038,7 +995,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gst</string>
+				<string>{var:keyword_personal_repos}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1054,20 +1011,27 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/github-starred-repos.js</string>
+				<string>./scripts/my-github-repos.js</string>
 				<key>subtext</key>
-				<string>100 most recently starred repos</string>
+				<string></string>
 				<key>title</key>
-				<string>⭐️ Search my GitHub stars</string>
+				<string>Search my GitHub repos</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>repo-search-loop</string>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</string>
+			<string>388AD75C-BCFB-445D-B62E-13BC0545FD5E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1178,62 +1142,6 @@
 			<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:keyword_personal_repos}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/my-github-repos.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search my GitHub repos</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>repo-search-loop</string>
-				<key>inputmode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>388AD75C-BCFB-445D-B62E-13BC0545FD5E</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1553,9 +1461,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>500</real>
 		</dict>
 		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
 		<dict>
@@ -1615,7 +1523,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>610</real>
 		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
@@ -1797,17 +1705,6 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>470</real>
-		</dict>
-		<key>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>personal starred repos</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>620</real>
 		</dict>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<dict>
