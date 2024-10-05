@@ -21,14 +21,16 @@ Helpful GitHub Assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
 	  repo for a PR.
+	+ <kbd>⌥⏎</kbd>: Search the repo for a query via GitHub Code Search.
 - Access public repositories you own via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
-	+ <kbd>⌥⏎</kbd>: Copy the repo link.
+	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
+	+ <kbd>⌥⏎</kbd>: Search the repo for a query via GitHub Code Search.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.

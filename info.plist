@@ -179,6 +179,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>7469D290-C30B-4F58-8EBC-216A2603CFAE</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search repo via GitHub Code Search…</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -260,6 +270,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7469D290-C30B-4F58-8EBC-216A2603CFAE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8C392BA8-3302-48AD-9B57-A07B9031D19C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -444,6 +467,16 @@
 				<string>⌘: Open Homepage (or Releases)</string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7469D290-C30B-4F58-8EBC-216A2603CFAE</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search repo via GitHub Code Search…</string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -919,6 +952,102 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>in {var:repo}</string>
+				<key>text</key>
+				<string>Search code for: {query}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7469D290-C30B-4F58-8EBC-216A2603CFAE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/search?q=repo:{var:repo}+{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>8C392BA8-3302-48AD-9B57-A07B9031D19C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword_personal_repos}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/my-github-repos.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search my GitHub repos</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>repo-search-loop</string>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>388AD75C-BCFB-445D-B62E-13BC0545FD5E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -978,62 +1107,6 @@
 			<string>462691DA-0319-4F31-B297-CC4A75FD1DFE</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:keyword_personal_repos}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/my-github-repos.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search my GitHub repos</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>repo-search-loop</string>
-				<key>inputmode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>388AD75C-BCFB-445D-B62E-13BC0545FD5E</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1389,7 +1462,8 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>- Search all public GitHub repositories via the keyword `gh`.
+	<string>## Usage
+- Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
@@ -1397,14 +1471,16 @@
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
 	  repo for a PR.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Search the repo for a query via GitHub Code Search.
 - Access public repositories you own via `gmy`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo link.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Search the repo for a query via GitHub Code Search.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
@@ -1424,13 +1500,13 @@
 
 ---
 
-#### Created by [Chris Grieser](https://chris-grieser.de/)  |  ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)</string>
+#### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
@@ -1443,7 +1519,7 @@
 			<key>xpos</key>
 			<real>810</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>1135</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1454,21 +1530,21 @@
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>1015</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>290</real>
 			<key>ypos</key>
 			<real>500</real>
 		</dict>
 		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
@@ -1492,7 +1568,7 @@
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1030</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1534,7 +1610,7 @@
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>735</real>
 		</dict>
 		<key>43F0CA76-BFE8-415E-97B3-F6B953E904FE</key>
 		<dict>
@@ -1543,7 +1619,7 @@
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>1095</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
@@ -1552,7 +1628,7 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>685</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
@@ -1561,7 +1637,7 @@
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>815</real>
 		</dict>
 		<key>504CECC9-A64D-4F2A-A0E5-664B355EB529</key>
 		<dict>
@@ -1590,7 +1666,16 @@
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>985</real>
+		</dict>
+		<key>7469D290-C30B-4F58-8EBC-216A2603CFAE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>500</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1610,7 +1695,16 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>810</real>
+		</dict>
+		<key>8C392BA8-3302-48AD-9B57-A07B9031D19C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>500</real>
 		</dict>
 		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
 		<dict>
@@ -1621,7 +1715,7 @@
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>950</real>
 		</dict>
 		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
 		<dict>
@@ -1632,14 +1726,14 @@
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>650</real>
 		</dict>
 		<key>9AED849C-2F6C-4741-B375-875D5613781A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>730</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1661,7 +1755,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1030</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1672,7 +1766,7 @@
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1030</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
@@ -1681,12 +1775,12 @@
 			<key>xpos</key>
 			<real>890</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>755</real>
 		</dict>
 		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>DOUBLE-CLICK THIS
 to set a htokey to clone the repo in the frontmost browser tab</string>
@@ -1713,7 +1807,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>620</real>
 		</dict>
 		<key>F1ACCD95-5E8C-469E-AFD1-D184923540FB</key>
 		<dict>
@@ -1722,12 +1816,12 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>765</real>
 		</dict>
 		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
@@ -1740,7 +1834,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>990</real>
+			<real>1105</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1749,7 +1843,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1145</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
