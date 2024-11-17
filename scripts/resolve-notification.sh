@@ -24,7 +24,7 @@ else
 				-H "Authorization: Bearer $GITHUB_TOKEN" \
 				-H "X-GitHub-Api-Version: 2022-11-28" \
 				"$api_url" |
-				grep --max-count=1 "html_url" | cut -d '"' -f 4 # skip `jq` dependency
+				grep --max-count=1 '"html_url"' | cut -d '"' -f 4 # skip `jq` dependency
 		)
 	fi
 
