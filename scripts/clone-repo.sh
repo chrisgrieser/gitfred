@@ -2,6 +2,7 @@
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
+# VARIABLES
 https_url="$1"
 source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
@@ -54,7 +55,7 @@ cd "$clone_dir" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# POST-CLONE ACTIONS
+# BRANCH ON CLONE
 if [[ -n "$branch_on_clone" ]]; then
 	# `git switch` fails silently if the branch does not exist
 	git switch "$branch_on_clone" &> /dev/null
