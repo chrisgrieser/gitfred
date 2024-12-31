@@ -32,12 +32,12 @@ elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]]; then
 fi
 
 # clone with depth
-if [[ $clone_depth == "0" ]]; then
+if [[ $clone_depth -eq 0 ]]; then
 	msg=$(git clone "$ssh_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
-	[[ $clone_depth == "1" ]] && clone_depth=2
+	[[ $clone_depth -eq 1 ]] && clone_depth=2
 	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
 fi
 
@@ -60,10 +60,37 @@ if [[ -n "$branch_on_clone" ]]; then
 	git switch "$branch_on_clone" &> /dev/null
 fi
 
-if [[ "$restore_mtime" == "1" ]]; then
+# RESTORE MTIME
+# PERF `partial` checks only files touched in the last x commits (with x being clone
+# depth or 50), while `full` checks every single file. `partial` is magnitudes
+# quicker, but does not restore the mtime for all files correctly, since only
+# some commits are considered. If using shallow clones (`clone_depth` > 0), will
+# automatically use `partial`, since there is not enough git history for correct
+# mtime restoring, so `partial` and `full` have the same result, and using
+# `partial` is then always preferable due to being quicker.
+if [[ "$restore_mtime" == "quick-partial" || $clone_depth -ne 0 ]]; then
+	how_far=$([[ $clone_depth -eq 0 ]] && echo 50 || echo $((clone_depth - 1)))
+
+	# set date for all files to x+1 commits ago
+	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far"^)
+	old_timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$oldest_commit")
+	git ls-tree -t -r --name-only HEAD | xargs touch -t "$old_timestamp"
+
+	# set mtime for all files touched in last x commits
+	# (reverse with `tail -r` so most recent commit comes last)
+	last_commits=$(git log --format="%h" --max-count="$how_far" | tail -r)
+	echo "$last_commits" | while read -r hash; do
+		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
+		changed_files=$(git log -1 --name-only --format="" "$hash")
+		echo "$changed_files" | while read -r file; do
+			# check for file existence, since a file could have been deleted/moved
+			[[ -f "$file" ]] && touch -t "$timestamp" "$file"
+		done
+	done
+elif [[ "$restore_mtime" == "slow-full" ]]; then
 	# https://stackoverflow.com/a/36243002/22114136
-	git ls-tree -r -t --full-name --name-only HEAD | while read -r file; do
-		timestamp=$(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 HEAD -- "$file")
+	git ls-tree -t -r --name-only HEAD | while read -r file; do
+		timestamp=$(git log --format="%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
 		touch -t "$timestamp" "$file"
 	done
 fi
@@ -86,6 +113,6 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	fi
 
 	if [[ -n "$on_fork_branch" ]]; then
-		git switch --create "$on_fork_branch"
+		git switch --create "$on_fork_branch" &> /dev/null
 	fi
 fi
