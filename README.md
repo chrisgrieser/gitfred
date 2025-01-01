@@ -1,4 +1,6 @@
+<!-- LTeX: enabled=false -->
 # Alfred GitFred
+<!-- LTeX: enabled=true -->
 ![GitHub Downloads](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=GitHub%20Downloads&style=plastic&logo=github)
 ![Alfred Gallery Downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
 ![Latest Release](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
@@ -18,12 +20,10 @@ Helpful GitHub assistant for Alfred.
 	  releases page instead.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
-	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
-	  repo for a PR.
-	+ <kbd>⇧⏎</kbd>: Search the repo for a query via GitHub Code Search.
+	+ <kbd>⌥⏎</kbd>: Search the repo for a query via GitHub Code Search.
 - Access public repositories you own via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
-	  Finder. Otherwise, open the repo's GitHub page.
+	  the terminal. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
@@ -61,7 +61,7 @@ digital economy. For my PhD project, I investigate the governance of the app
 economy and how software ecosystems manage the tension between innovation and
 compatibility. If you are interested in this subject, feel free to get in touch.
 
-- [Academic Website](https://chris-grieser.de/)
+- [Website](https://chris-grieser.de/)
 - [Mastodon](https://pkm.social/@pseudometa)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
