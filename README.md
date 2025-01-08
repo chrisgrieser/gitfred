@@ -1,9 +1,9 @@
 <!-- LTeX: enabled=false -->
 # Alfred GitFred
 <!-- LTeX: enabled=true -->
-![GitHub Downloads](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=GitHub%20Downloads&style=plastic&logo=github)
-![Alfred Gallery Downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
-![Latest Release](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
+![GitHub downloads](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=GitHub%20Downloads&style=plastic&logo=github)
+![Alfred Gallery downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
+![Version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
 
 Helpful GitHub assistant for Alfred.
 
@@ -66,11 +66,6 @@ compatibility. If you are interested in this subject, feel free to get in touch.
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
 
-<a href='https://ko-fi.com/Y8Y86SQ91' target='_blank'>
-	<img
-	height='36'
-	style='border:0px;height:36px;'
-	src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3'
-	border='0'
-	alt='Buy Me a Coffee at ko-fi.com'
-/></a>
+<a href='https://ko-fi.com/Y8Y86SQ91' target='_blank'> <img height='36'
+style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3'
+border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
