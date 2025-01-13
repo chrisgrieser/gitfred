@@ -49,7 +49,8 @@ if [[ $success -ne 0 ]]; then
 fi
 
 # Open in terminal via Alfred
-echo -n "$local_repo_folder/$clone_dir"
+abs_path="$local_repo_folder/$clone_dir"
+echo -n "$abs_path"
 
 cd "$clone_dir" || return 1
 
@@ -103,7 +104,7 @@ fi
 if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 
 	if [[ -x "$(command -v gh)" ]]; then
-		gh repo fork --remote=false
+		gh repo fork --remote=false &> /dev/null
 	else
 		echo "ERROR: Cannot fork, \`gh\` not installed."
 	fi
