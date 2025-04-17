@@ -34,6 +34,8 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
+    + Optional [GitHub Token](https://github.com/settings/tokens) with access
+	  to private PRs.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
 - Directly open your GitHub notification via `ghn`.
