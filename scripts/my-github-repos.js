@@ -11,11 +11,20 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
-function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+/**
+ * @param {string} url
+ * @param {string[]} header
+ * @param {string=} extraOpts
+ * @return {string} response
+ */
+function httpRequestWithHeaders(url, header, extraOpts) {
+	let allHeaders = "";
+	for (const line of header) {
+		allHeaders += `-H "${line}" `;
+	}
+	extraOpts = extraOpts || "";
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
+	return app.doShellScript(curlRequest);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -28,6 +37,9 @@ function run() {
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
+	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	const githubToken =
+		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -54,10 +66,16 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// FETCH REMOTE REPOS
 
-	// DOCS https://docs.github.com/en/rest/repos?apiVersion=2022-11-28
-	// `type=all` includes owned repos and member repos
-	const apiUrl = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
-	const response = httpRequest(apiUrl);
+	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+	let apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
+	if (githubToken) {
+		headers.push(`Authorization: BEARER ${githubToken}`);
+		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
+		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated"
+	}
+
+	const response = httpRequestWithHeaders(apiURL, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -104,6 +122,8 @@ function run() {
 			if (repo.fork) matcher += "fork ";
 			if (repo.is_template) type += "📄 ";
 			if (repo.is_template) matcher += "template ";
+			if (repo.private) type += "🔒 ";
+			if (repo.private) matcher += "private ";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
@@ -116,7 +136,7 @@ function run() {
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
-				quicklookurl: mainArg,
+				quicklookurl: repo.private ? undefined : mainArg,
 				uid: repo.name,
 				mods: {
 					ctrl: { subtitle: "⌃: " + termAct, arg: terminalArg },

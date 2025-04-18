@@ -70,7 +70,7 @@ function run() {
 		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 
 	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
-	const headers = ["Accept: application/vnd.github.v3+json", "X-GitHub-Api-Version: 2022-11-28"];
+	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
 
 	const response = httpRequestWithHeaders(apiURL, headers);

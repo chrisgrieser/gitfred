@@ -20,7 +20,7 @@ Helpful GitHub assistant for Alfred.
 	  releases page instead.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
-- Access your repositories via `gmy`.
+- Access your repositories via `gmy`. (Limited to the 100 repos last updated.)
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
@@ -28,6 +28,8 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
+	+ To include private repos, requires a [GitHub
+	  Token](https://github.com/settings/tokens) with the respective access.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
@@ -35,8 +37,7 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
 	+ To include private PRs, requires a [GitHub
-	  Token](https://github.com/settings/tokens) with access the respective
-	  access.
+	  Token](https://github.com/settings/tokens) with the respective access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
 	  to notifications.
