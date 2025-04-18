@@ -54,9 +54,10 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// FETCH REMOTE REPOS
 
-	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+	// DOCS https://docs.github.com/en/rest/repos?apiVersion=2022-11-28
 	// `type=all` includes owned repos and member repos
-	const response = httpRequest(`https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`);
+	const apiUrl = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	const response = httpRequest(apiUrl);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -98,7 +99,6 @@ function run() {
 				matcher += "local ";
 			}
 
-
 			// extra info
 			if (repo.fork) type += "🍴 ";
 			if (repo.fork) matcher += "fork ";
@@ -119,22 +119,10 @@ function run() {
 				quicklookurl: mainArg,
 				uid: repo.name,
 				mods: {
-					ctrl: {
-						subtitle: "⌃: " + termAct,
-						arg: terminalArg,
-					},
-					alt: {
-						subtitle: "⌥: Copy GitHub URL",
-						arg: repo.html_url,
-					},
-					cmd: {
-						subtitle: "⌘: Open at GitHub",
-						arg: repo.html_url,
-					},
-					shift: {
-						arg: "", // empty for next input
-						variables: { repo: repo.full_name },
-					},
+					ctrl: { subtitle: "⌃: " + termAct, arg: terminalArg },
+					alt: { subtitle: "⌥: Copy GitHub URL", arg: repo.html_url },
+					cmd: { subtitle: "⌘: Open at GitHub", arg: repo.html_url },
+					shift: { arg: "", variables: { repo: repo.full_name } }, // arg empty for next input
 				},
 			};
 			return alfredItem;
@@ -143,9 +131,6 @@ function run() {
 	return JSON.stringify({
 		items: scriptFilterArr,
 		variables: { ownerOfRepo: "true" },
-		cache: {
-			seconds: 15, // short, since cloned repos should be available immediately
-			loosereload: true,
-		},
+		cache: { seconds: 15, loosereload: true }, // short, since cloned repos should be available immediately
 	});
 }

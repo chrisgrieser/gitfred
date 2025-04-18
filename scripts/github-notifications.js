@@ -16,7 +16,7 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 		allHeaders += `-H "${line}" `;
 	}
 	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
 	return app.doShellScript(curlRequest);
 }
 
@@ -58,11 +58,9 @@ function humanRelativeDate(isoDateStr) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	const githubToken =
-		$.getenv("github_token_from_alfred_prefs").trim() ||
-		app
-			.doShellScript("test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN")
-			.trim();
+		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 
@@ -83,9 +81,9 @@ function run() {
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 	const parameter = showReadNotifs ? "?all=true" : "";
 	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
-		"Accept: application/vnd.github.v3+json",
-		`Authorization: BEARER ${githubToken}`,
+		"Accept: application/vnd.github.json",
 		"X-GitHub-Api-Version: 2022-11-28",
+		`Authorization: BEARER ${githubToken}`,
 	]);
 	if (!response) {
 		return JSON.stringify({

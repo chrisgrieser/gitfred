@@ -20,8 +20,7 @@ Helpful GitHub assistant for Alfred.
 	  releases page instead.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
-	+ <kbd>⌥⏎</kbd>: Search the repo for a query via GitHub Code Search.
-- Access public repositories you own via `gmy`.
+- Access your repositories via `gmy`.
 	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
@@ -29,15 +28,15 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ <kbd>⌥⏎</kbd>: Search the repo for a query via GitHub Code Search.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
-    + Optional [GitHub Token](https://github.com/settings/tokens) with access
-	  to private PRs.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
+	+ To include private PRs, requires a [GitHub
+	  Token](https://github.com/settings/tokens) with access the respective
+	  access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
 	  to notifications.
@@ -45,19 +44,14 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
 	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
-  GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## Installation
-This workflow requires Alfred 5.5.
-
 [➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
 
-The workflow auto-updates via Alfred's workflow-update mechanism.
-
-<!-- vale Google.FirstPerson = NO -->
-## Credits
+## About the developer
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app
 economy and how software ecosystems manage the tension between innovation and
