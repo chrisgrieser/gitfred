@@ -28,15 +28,15 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ To include private repos, requires a [GitHub
+	+ To include private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens) with the respective access.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
-- Access Pull Requests (PRs) you have opened with the keyword `gpr`.
+- Access PRs you have opened with the keyword `gpr`.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
-	+ To include private PRs, requires a [GitHub
+	+ To include private PRs, requires [GitHub
 	  Token](https://github.com/settings/tokens) with the respective access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
