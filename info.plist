@@ -1426,8 +1426,8 @@
 	</array>
 	<key>readme</key>
 	<string>## ℹ️ Recent change
-`restore mtime` has been reworked to be magnitudes quicker. 
-If you have enabled it in past versions, please check your workflow configuration, 
+`restore mtime` has been reworked to be magnitudes quicker.
+If you have enabled it in past versions, please check your workflow configuration,
 since there are now different options for it.
 
 ## Usage
@@ -1739,7 +1739,7 @@ since there are now different options for it.
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>DOUBLE-CLICK THIS 
+			<string>DOUBLE-CLICK THIS
 
 to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
@@ -2038,7 +2038,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>GitHub Token. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. (Only needed for showing notifications via `ghn`.)</string>
+			<string>GitHub Token. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. (Needed for showing notifications via `ghn`. Optional for `gpr` to show PRs in private repositories.)</string>
 			<key>label</key>
 			<string>Notifications</string>
 			<key>type</key>
@@ -2053,3 +2053,4 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 	<string>https://chris-grieser.de/</string>
 </dict>
 </plist>
+
