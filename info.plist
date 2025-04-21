@@ -1858,7 +1858,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Public Repo Search</string>
+			<string>Search all public repos</string>
 			<key>label</key>
 			<string>Keywords</string>
 			<key>type</key>
@@ -1879,13 +1879,32 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Personal Repo Search</string>
+			<string>Search your personal repos</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword_personal_repos</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use Alfred knowledge</string>
+			</dict>
+			<key>description</key>
+			<string>The search lists your 100 most recent repos, sorted by last updated time. If enabled, will also use Alfred knowledge (recent &amp; frequent use) to sort the repos.</string>
+			<key>label</key>
+			<string>Personal repos order</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_alfred_frecency</string>
 		</dict>
 		<dict>
 			<key>config</key>
