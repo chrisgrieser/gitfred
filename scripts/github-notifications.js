@@ -15,6 +15,7 @@ function httpRequestWithHeaders(url, header) {
 		allHeaders += ` -H "${line}"`;
 	}
 	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log("curl command:", curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
