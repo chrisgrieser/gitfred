@@ -83,7 +83,7 @@ function run() {
 	}
 
 	const scriptFilterArr = JSON.parse(response)
-		.filter((/** @type {GithubRepo} */ repo) => !repo.archived)
+		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
 		.sort(
 			(
 				/** @type {GithubRepo&{isLocal: boolean}} */ a,
@@ -140,7 +140,6 @@ function run() {
 					ctrl: { subtitle: "⌃: " + termAct, arg: terminalArg },
 					alt: { subtitle: "⌥: Copy GitHub URL", arg: repo.html_url },
 					cmd: { subtitle: "⌘: Open at GitHub", arg: repo.html_url },
-					shift: { arg: "", variables: { repo: repo.full_name } }, // arg empty for next input
 				},
 			};
 			return alfredItem;
