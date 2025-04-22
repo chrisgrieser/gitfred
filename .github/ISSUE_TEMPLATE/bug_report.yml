@@ -3,18 +3,31 @@ description: File a bug report
 title: "[Bug]: "
 labels: ["bug"]
 body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have [updated to the latest version](./releases/latest) of this workflow.
+          required: true
+        - label: I am using Alfred 5.5. (Older versions are not supported anymore.)
+          required: true
+        - label:
+            If I am using a `GITHUB_TOKEN`, I have checked that the token is still valid and has the
+            required access rights.
+          required: true
   - type: textarea
     id: bug-description
     attributes:
       label: Bug Description
       description: A clear and concise description of the bug.
-    validations:
-      required: true
+    validations: { required: true }
   - type: textarea
     id: screenshot
     attributes:
       label: Relevant Screenshot
-      description: If applicable, add screenshots or a screen recording to help explain your problem.
+      description:
+        If applicable, add screenshots or a screen recording to help explain your problem.
   - type: textarea
     id: reproduction-steps
     attributes:
@@ -29,23 +42,20 @@ body:
     id: debugging-log
     attributes:
       label: Debugging Log
-      description: "You can get a debugging log by opening the workflow in Alfred preferences and pressing `⌘ + D`. A small window will open up which will log everything happening during the execution of the Workflow. Use the malfunctioning part of the workflow once more, copy the content of the log window, and paste it here. If the debugging log is long, please attach it as file instead of pasting everything in here."
+      description:
+        "You can get a debugging log by opening the workflow in Alfred preferences and pressing `⌘ +
+        D`. A small window will open up which will log everything happening during the execution of
+        the Workflow. Use the malfunctioning part of the workflow once more, copy the content of the
+        log window, and paste it here. If the debugging log is long, please attach it as file
+        instead of pasting everything in here. NOTE: Your `GITHUB_TOKEN` will be included in the
+        log, please remove it before posting here."
       render: Text
-    validations:
-      required: true
+    validations: { required: true }
   - type: textarea
     id: workflow-configuration
     attributes:
       label: Workflow Configuration
-      description: "Please add a screenshot of your [workflow configuration](https://www.alfredapp.com/help/workflows/user-configuration/)."
-    validations:
-      required: true
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: Checklist
-      options:
-        - label: I have [updated to the latest version](./releases/latest) of this workflow.
-          required: true
-        - label: I am using Alfred 5. (Older versions are not supported anymore.)
-          required: true
+      description:
+        "Please add a screenshot of your [workflow
+        configuration](https://www.alfredapp.com/help/workflows/user-configuration/)."
+    validations: { required: true }
