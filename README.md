@@ -29,7 +29,7 @@ Helpful GitHub assistant for Alfred.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
 	+ To include private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens) with the respective access.
+	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
@@ -37,11 +37,12 @@ Helpful GitHub assistant for Alfred.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
 	+ To include private PRs, requires [GitHub
-	  Token](https://github.com/settings/tokens) with the respective access.
+	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
-	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
-	  to notifications.
-	+ <kbd>⏎</kbd>: Open the notification in the browser.
+	+ Requires [GitHub Token](https://github.com/settings/tokens).
+	+ <kbd>⏎</kbd>: Open the notification in the browser. In cases where no URL
+	  is available, such as deleted comments or CI activity, opens the GitHub
+	  notification inbox instead.
 	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
 	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
 - Additionally, you can press the
