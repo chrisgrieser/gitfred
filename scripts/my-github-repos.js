@@ -81,7 +81,7 @@ function run() {
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
-	const parsedRepos = JSON.parse(response)
+	const parsedRepos = JSON.parse(response);
 	console.log("Repo count:", parsedRepos.length);
 
 	const repos = parsedRepos
