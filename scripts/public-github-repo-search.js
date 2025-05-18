@@ -46,6 +46,13 @@ function humanRelativeDate(isoDateStr) {
 	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
 }
 
+/** @param {number} starcount */
+function shortNumber(starcount) {
+	const starStr = starcount.toString();
+	if (starcount < 2000) return starStr;
+	return starStr.slice(0, -3) + "k";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -84,7 +91,7 @@ function run(argv) {
 
 			const subtitle = [
 				repo.owner.login,
-				"★ " + repo.stargazers_count,
+				"★ " + shortNumber(repo.stargazers_count),
 				lastUpdated,
 				repo.description,
 			]
