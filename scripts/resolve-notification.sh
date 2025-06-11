@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 
-if [[ "$github_token_from_op_plugin" == "true" ]]; then
+if [[ "$github_token_from_op_plugin" == "1" ]]; then
 	GITHUB_TOKEN=$(op plugin run -- gh auth token)
 fi
 

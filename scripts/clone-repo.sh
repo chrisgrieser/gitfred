@@ -103,7 +103,7 @@ fi
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
 if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	GH=gh
-	if [[ "$github_token_from_op_plugin" == "true" ]]; then
+	if [[ "$github_token_from_op_plugin" == "1" ]]; then
 		GH="op plugin run -- gh"
 	fi
 
