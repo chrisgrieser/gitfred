@@ -1866,7 +1866,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
-			<string>use_op_plugin</string>
+			<string>github_token_from_op_plugin</string>
 		</dict>
 		<dict>
 			<key>config</key>
