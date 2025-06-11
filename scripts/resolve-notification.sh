@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 
+if [[ "$github_token_from_op_plugin" == "true" ]]; then
+	GITHUB_TOKEN=$(./op_github_token.sh)
+fi
+
 # MARK AS READ
 if [[ "$mode" == "mark-as-read" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read

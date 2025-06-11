@@ -44,8 +44,9 @@ function run() {
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
 	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	const opTokenShellCmd = "./op-github-token.sh"
 	const githubToken =
-		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
+		app.doShellScript(opTokenShellCmd).trim() || $.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
 
 	// determine local repos
