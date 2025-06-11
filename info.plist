@@ -1853,6 +1853,25 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string>Use the GitHub Personal Access Token configured for use with the `op` plugin</string>
+			<key>label</key>
+			<string>Token from 1Password</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_op_plugin</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>gh</string>
 				<key>placeholder</key>
 				<string>gh</string>
