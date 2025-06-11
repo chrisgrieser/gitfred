@@ -55,7 +55,7 @@ function humanRelativeDate(isoDateStr) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
-	const opTokenShellCmd = "./scripts/op-github-token.sh"
+	const opTokenShellCmd = "op plugin run -- gh auth token"
 	const githubToken =
 		app.doShellScript(opTokenShellCmd).trim() || $.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 	const showReadNotifs =

@@ -2,7 +2,7 @@
 # shellcheck disable=2154
 
 if [[ "$github_token_from_op_plugin" == "true" ]]; then
-	GITHUB_TOKEN=$(./op_github_token.sh)
+	GITHUB_TOKEN=$(op plugin run -- gh auth token)
 fi
 
 # MARK AS READ

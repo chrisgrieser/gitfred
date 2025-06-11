@@ -62,7 +62,7 @@ function humanRelativeDate(isoDateStr) {
 function run() {
 	const username = $.getenv("github_username");
 	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
-	const opTokenShellCmd = "./scripts/op-github-token.sh"
+	const opTokenShellCmd = "op plugin run -- gh auth token"
 	const githubToken =
 		app.doShellScript(opTokenShellCmd).trim() || $.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 
