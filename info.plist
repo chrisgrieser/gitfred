@@ -1857,12 +1857,12 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>Use token from 1Password</string>
 			</dict>
 			<key>description</key>
 			<string>Optional. Use the GitHub Personal Access Token configured for use with the `op` plugin. This checkbox will override the static GitHub token configured above.</string>
 			<key>label</key>
-			<string>Token from 1Password</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
