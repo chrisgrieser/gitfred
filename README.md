@@ -2,7 +2,7 @@
 # Alfred GitFred
 <!-- LTeX: enabled=true -->
 ![GitHub downloads](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=GitHub%20Downloads&style=plastic&logo=github)
-![Alfred Gallery downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
+![Alfred Gallery downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-gallery-downloads.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
 ![Version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
 
 Helpful GitHub assistant for Alfred.
