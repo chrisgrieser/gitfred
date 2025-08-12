@@ -51,19 +51,13 @@ Helpful GitHub assistant for Alfred.
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
+Optional. Only required for showing notifications, private PRs, and private
+repos. The token requires accesses to private repos and to notifications. The
+workflow will check for the token in the following order:
 1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
-2. Or: export the token in your `.zshenv`.
-
-```zsh
-# add this to your `$HOME/.zshenv`
-# ($alfred_workflow_name is only populated by shell processes that called by Alfred)
-if [[ "$alfred_workflow_name" == "GitFred" ]] ; then
-	export GITHUB_TOKEN="..."
-	# if using a password manager, you can do something like this 
-	# (`op` being the CLI for 1Password)
-	export GITHUB_TOKEN=$(op plugin run -- gh auth token)
-fi
-```
+2. Or: add a shell command that outputs your `GITHUB_TOKEN`, such as `cat
+   $HOME/my_token.txt`.
+3. Or: export the token in your `.zshenv`.
 
 ## Installation
 [➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
