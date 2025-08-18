@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
+#───────────────────────────────────────────────────────────────────────────────
+
+# GET TOKEN
+token=$github_token_from_alfred_prefs
+[[ -z "$token" && -n "$github_token_shell_cmd" ]] && token=$(zsh -c "$github_token_shell_cmd")
+[[ -z "$token" ]] && token=$GITHUB_TOKEN
 
 # MARK AS READ
 if [[ "$mode" == "mark-as-read" ]]; then
@@ -15,18 +21,15 @@ if [[ "$mode" == "mark-as-read" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
+# OPEN/COPY URL
 
-api_url="$1"
+# get github url
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#get-a-thread
+api_url="$1"
 if [[ -z "$api_url" && "$mode" == "open" ]]; then
 	# some notification types like ci-activity do not provide a thread
 	github_url="https://github.com/notifications"
 else
-	# get token
-	token=$github_token_from_alfred_prefs
-	[[ -z "$token" && -n "$github_token_shell_cmd" ]] && token=$(zsh -c "$github_token_shell_cmd")
-	[[ -z "$token" ]] && token=$GITHUB_TOKEN
-
 	response=$(curl -sL -H "Accept: application/vnd.github+json" \
 		-H "Authorization: Bearer $token" \
 		-H "X-GitHub-Api-Version: 2022-11-28" \
@@ -41,6 +44,7 @@ else
 	fi
 fi
 
+# action
 if [[ "$mode" == "open" ]]; then
 	open "$github_url"
 	if [[ "$github_url" == "https://github.com/notifications" ]]; then
