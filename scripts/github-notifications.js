@@ -97,6 +97,7 @@ function run() {
 		const deactivatedMods = {
 			cmd: { valid: false, subtitle: "" },
 			alt: { valid: false, subtitle: "" },
+			ctrl: { valid: false, subtitle: "" },
 		};
 		return JSON.stringify({
 			items: [
@@ -158,6 +159,11 @@ function run() {
 					subtitle: showReadNotifs ? "🚫 Is already marked as read." : "⌘: Mark as Read",
 					// CAVEAT mark-as-unread not support in GitHub Notification API
 					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
+				},
+				ctrl: {
+					arg: notif.id,
+					subtitle: "⌃: Mark as done",
+					variables: { mode: "mark-as-done", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {
 					subtitle: notifApiUrl ? "⌥: Copy URL" : "(🚫 No URL)",

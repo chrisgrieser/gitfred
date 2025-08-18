@@ -45,6 +45,7 @@ Helpful GitHub assistant for Alfred.
 	  notification inbox instead.
 	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
 	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
+	+ <kbd>⌃⏎</kbd>: Mark the notification as done.
 - Additionally, you can press the
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
   a GitHub repo from the current browser tab. ([Note that Firefox is not
