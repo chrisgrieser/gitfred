@@ -149,7 +149,7 @@ function run() {
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: notif.subject.title,
-			subtitle,
+			subtitle: subtitle,
 			arg: notifApiUrl,
 			variables: { mode: "open" },
 			mods: {
