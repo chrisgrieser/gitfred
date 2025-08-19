@@ -25,7 +25,7 @@ Helpful GitHub assistant for Alfred.
 	  the terminal. Otherwise, open the repo's GitHub page.
 	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
 	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
-	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
+	+ <kbd>⇧⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
 	+ To include private repos, requires [GitHub

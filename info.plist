@@ -399,9 +399,9 @@
 				<key>destinationuid</key>
 				<string>B82F00A2-AF4F-47B3-BE86-3D5E11461819</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Mark as done</string>
+				<string>⇧: Mark as done</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -1552,7 +1552,7 @@
 	  notification inbox instead.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Mark the notification as done.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Mark the notification as done.
 - Additionally, you can press the
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
   a GitHub repo from the current browser tab. ([Note that Firefox is not
