@@ -33,6 +33,8 @@ Helpful GitHub assistant for Alfred.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ <kbd>⏎</kbd>: Open the issue in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
+	+ To include issues in private repos, requires [GitHub
+	  Token](https://github.com/settings/tokens).
 - Access PRs you have opened with the keyword `gpr`.
 	+ <kbd>⏎</kbd>: Open the PR in the browser.
 	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
