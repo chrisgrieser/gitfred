@@ -66,7 +66,7 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	const apiUrl = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
+	const apiUrl = "https://api.github.com/search/repositories?q=" + encodeURIComponent(query);
 	const response = httpRequest(apiUrl);
 	if (!response) {
 		return JSON.stringify({
@@ -81,45 +81,50 @@ function run(argv) {
 	const shallowClone = cloneDepth > 0;
 
 	/** @type {AlfredItem[]} */
-	const repos = JSON.parse(response)
-		.items.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
-		.map((/** @type {GithubRepo} */ repo) => {
-			// calculate relative date
-			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
-			// CAVEAT pushed_at apparently also includes pushes via PR :(
-			const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
+	const repos = JSON.parse(response).items.map((/** @type {GithubRepo} */ repo) => {
+		// calculate relative date
+		// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
+		// CAVEAT pushed_at apparently also includes pushes via PR :(
+		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
-			const subtitle = [
-				repo.owner.login,
-				"★ " + shortNumber(repo.stargazers_count),
-				lastUpdated,
-				repo.description,
-			]
-				.filter(Boolean)
-				.join("  ·  ");
+		let matcher = alfredMatcher(repo.name);
+		let type = "";
+		if (repo.fork) type += "🍴 ";
+		if (repo.fork) matcher += "fork ";
+		if (repo.archived) type += "🗄️ ";
+		if (repo.archived) matcher += "archived ";
 
-			let cloneSubtitle = shallowClone ? `⌃: Shallow Clone (depth ${cloneDepth})` : "⌃: Clone";
-			if (forkOnClone) cloneSubtitle += " & Fork";
+		const subtitle = [
+			repo.owner.login,
+			"★ " + shortNumber(repo.stargazers_count),
+			lastUpdated,
+			repo.description,
+		]
+			.filter(Boolean)
+			.join("  ·  ");
 
-			const secondUrl = repo.homepage || repo.html_url + "/releases";
+		let cloneSubtitle = shallowClone ? `⌃: Shallow Clone (depth ${cloneDepth})` : "⌃: Clone";
+		if (forkOnClone) cloneSubtitle += " & Fork";
 
-			return {
-				title: repo.name,
-				subtitle: subtitle,
-				match: alfredMatcher(repo.name),
-				arg: repo.html_url,
-				quicklookurl: repo.html_url,
-				mods: {
-					cmd: {
-						arg: secondUrl,
-						subtitle: `⌘: Open  "${secondUrl}"`,
-					},
-					ctrl: {
-						subtitle: cloneSubtitle,
-					},
+		const secondUrl = repo.homepage || repo.html_url + "/releases";
+
+		return {
+			title: type + repo.name,
+			subtitle: subtitle,
+			match: matcher,
+			arg: repo.html_url,
+			quicklookurl: repo.html_url,
+			mods: {
+				cmd: {
+					arg: secondUrl,
+					subtitle: `⌘: Open  "${secondUrl}"`,
 				},
-			};
-		});
+				ctrl: {
+					subtitle: cloneSubtitle,
+				},
+			},
+		};
+	});
 
 	// GUARD no results
 	if (repos.length === 0) {

@@ -15,6 +15,10 @@ Helpful GitHub assistant for Alfred.
 
 ## Usage
 - Search all public GitHub repositories via the keyword `gh`.
+	* Uses the [GitHub search query
+	  syntax](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories),
+	  for example `alfred user:chrisgrieser` to search for repositories with the
+	  name `alfred` by the user `chrisgrieser`.
 	* <kbd>⏎</kbd>: Open the repo's GitHub page.
 	* <kbd>⌘⏎</kbd>: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
@@ -49,8 +53,8 @@ Helpful GitHub assistant for Alfred.
 	* <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
 	* <kbd>⌃⏎</kbd>: Mark the notification as done.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
-  GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
