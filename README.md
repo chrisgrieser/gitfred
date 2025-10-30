@@ -15,52 +15,52 @@ Helpful GitHub assistant for Alfred.
 
 ## Usage
 - Search all public GitHub repositories via the keyword `gh`.
-	+ <kbd>⏎</kbd>: Open the repo's GitHub page.
-	+ <kbd>⌘⏎</kbd>: Open the repo's homepage. If it has none, opens the
+	* <kbd>⏎</kbd>: Open the repo's GitHub page.
+	* <kbd>⌘⏎</kbd>: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
-	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
-	+ <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
+	* <kbd>⌥⏎</kbd>: Copy the repo URL.
+	* <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 - Access your repositories via `gmy`. (Limited to the 100 repos last updated.)
-	+ <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
+	* <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
-	+ <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
-	+ <kbd>⌥⏎</kbd>: Copy the repo URL.
-	+ <kbd>⇧⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
+	* <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
+	* <kbd>⌥⏎</kbd>: Copy the repo URL.
+	* <kbd>⇧⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ To include private repos, requires [GitHub
+	* To include private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
-	+ <kbd>⏎</kbd>: Open the issue in the browser.
-	+ <kbd>⌥⏎</kbd>: Copy the issue URL.
-	+ To include issues in private repos, requires [GitHub
+	* <kbd>⏎</kbd>: Open the issue in the browser.
+	* <kbd>⌥⏎</kbd>: Copy the issue URL.
+	* To include issues in private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Access PRs you have opened with the keyword `gpr`.
-	+ <kbd>⏎</kbd>: Open the PR in the browser.
-	+ <kbd>⌥⏎</kbd>: Copy the link to the PR.
-	+ To include private PRs, requires [GitHub
+	* <kbd>⏎</kbd>: Open the PR in the browser.
+	* <kbd>⌥⏎</kbd>: Copy the link to the PR.
+	* To include private PRs, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
-	+ Requires [GitHub Token](https://github.com/settings/tokens).
-	+ <kbd>⏎</kbd>: Open the notification in the browser. In cases where no URL
+	* Requires [GitHub Token](https://github.com/settings/tokens).
+	* <kbd>⏎</kbd>: Open the notification in the browser. In cases where no URL
 	  is available, such as deleted comments or CI activity, opens the GitHub
 	  notification inbox instead.
-	+ <kbd>⌘⏎</kbd>: Mark the notification as read.
-	+ <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
-	+ <kbd>⌃⏎</kbd>: Mark the notification as done.
+	* <kbd>⌘⏎</kbd>: Mark the notification as read.
+	* <kbd>⌥⏎</kbd>: Copy the URL of the notification target.
+	* <kbd>⌃⏎</kbd>: Mark the notification as done.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
-  a GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
+  GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
 Optional. Only required for showing notifications, private PRs, and private
 repos. The token requires accesses to private repos and to notifications. The
 workflow will check for the token in the following order:
-1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
-2. Or: add a shell command that outputs your `GITHUB_TOKEN`, such as `cat
-   $HOME/my_token.txt`.
-3. Or: export the token in your `.zshenv`.
+1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
+2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
+   $HOME/my_token.txt`, defined in your workflow settings.
+3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
 
 ## Installation
 [➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
