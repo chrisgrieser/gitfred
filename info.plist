@@ -1568,10 +1568,10 @@
 Optional. Only required for showing notifications, private PRs, and private
 repos. The token requires accesses to private repos and to notifications. The
 workflow will check for the token in the following order:
-1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
-2. Or: add a shell command that outputs your `GITHUB_TOKEN`, such as `cat
-   $HOME/my_token.txt`.
-3. Or: export the token in your `.zshenv`.
+1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
+2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
+   $HOME/my_token.txt`, defined in your workflow settings.
+3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
 
 ---
 
