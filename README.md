@@ -32,18 +32,12 @@ Helpful GitHub assistant for Alfred.
 	* <kbd>⇧⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	* To include private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
 	* <kbd>⏎</kbd>: Open the issue in the browser.
 	* <kbd>⌥⏎</kbd>: Copy the issue URL.
-	* To include issues in private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens).
 - Access PRs you have opened with the keyword `gpr`.
 	* <kbd>⏎</kbd>: Open the PR in the browser.
 	* <kbd>⌥⏎</kbd>: Copy the link to the PR.
-	* To include private PRs, requires [GitHub
-	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
 	* Requires [GitHub Token](https://github.com/settings/tokens).
 	* <kbd>⏎</kbd>: Open the notification in the browser. In cases where no URL
@@ -58,9 +52,16 @@ Helpful GitHub assistant for Alfred.
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
-Optional. Only required for showing notifications, private PRs, and private
-repos. The token requires accesses to private repos and to notifications. The
-workflow will check for the token in the following order:
+The `GITHUB_TOKEN` is optional and only required for showing notifications,
+private repos, PRs, and issues repos. The token requires the respective access
+rights.
+
+Note that other than for notifications, the workflow does not use the token by
+default, since including private noticeably slows down the search. To search
+private repos, PRs, and issues, you also need to enable the respective workflow
+setting.
+
+The workflow will check for the token in the following order:
 1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
 2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
    $HOME/my_token.txt`, defined in your workflow settings.
