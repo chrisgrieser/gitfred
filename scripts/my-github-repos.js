@@ -89,14 +89,42 @@ function run() {
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
-	const response = httpRequestWithHeaders(apiUrl, headers);
-	if (!response) {
-		return JSON.stringify({
-			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
-		});
+	// Paginate through all repos
+	const allRepos = [];
+	let page = 1;
+	let hasMore = true;
+
+	while (hasMore) {
+		const pageUrl = apiUrl + `&page=${page}`;
+		const response = httpRequestWithHeaders(pageUrl, headers);
+		if (!response) {
+			return JSON.stringify({
+				items: [
+					{
+						title: "No response from GitHub.",
+						subtitle: "Try again later.",
+						valid: false,
+					},
+				],
+			});
+		}
+		const parsedRepos = JSON.parse(response);
+		console.log(`Page ${page}: ${parsedRepos.length} repos`);
+
+		if (parsedRepos.length === 0) {
+			hasMore = false;
+		} else {
+			allRepos.push(...parsedRepos);
+			page++;
+			// GitHub returns less than 100 when on the last page
+			if (parsedRepos.length < 100) {
+				hasMore = false;
+			}
+		}
 	}
-	const parsedRepos = JSON.parse(response);
-	console.log("Repo count:", parsedRepos.length);
+
+	console.log("Total repo count:", allRepos.length);
+	const parsedRepos = allRepos;
 
 	const repos = parsedRepos
 		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
