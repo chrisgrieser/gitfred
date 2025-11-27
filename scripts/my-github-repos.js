@@ -92,41 +92,23 @@ function run() {
 	// Paginate through all repos
 	const allRepos = [];
 	let page = 1;
-	let hasMore = true;
-
-	while (hasMore) {
-		const pageUrl = apiUrl + `&page=${page}`;
-		const response = httpRequestWithHeaders(pageUrl, headers);
+	while (true) {
+		const response = httpRequestWithHeaders(apiUrl + `&page=${page}`, headers);
 		if (!response) {
-			return JSON.stringify({
-				items: [
-					{
-						title: "No response from GitHub.",
-						subtitle: "Try again later.",
-						valid: false,
-					},
-				],
-			});
+			const item = { title: "No response from GitHub. Try again later.", valid: false };
+			return JSON.stringify({ items: [item] });
 		}
-		const parsedRepos = JSON.parse(response);
-		console.log(`Page ${page}: ${parsedRepos.length} repos`);
+		const reposOfPage = JSON.parse(response);
+		console.log(`Page ${page}: ${reposOfPage.length} repos`);
 
-		if (parsedRepos.length === 0) {
-			hasMore = false;
-		} else {
-			allRepos.push(...parsedRepos);
-			page++;
-			// GitHub returns less than 100 when on the last page
-			if (parsedRepos.length < 100) {
-				hasMore = false;
-			}
-		}
+		if (reposOfPage.length === 0) break;
+		allRepos.push(...reposOfPage);
+		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
+		page++;
 	}
+	console.log("🪚 allRepos:", JSON.stringify(allRepos[1], null, 2))
 
-	console.log("Total repo count:", allRepos.length);
-	const parsedRepos = allRepos;
-
-	const repos = parsedRepos
+	const repos = allRepos
 		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
 		.sort(
 			(
