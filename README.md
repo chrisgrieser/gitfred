@@ -24,7 +24,7 @@ Helpful GitHub assistant for Alfred.
 	  releases page instead.
 	* <kbd>⌥⏎</kbd>: Copy the repo URL.
 	* <kbd>⌃⏎</kbd>: Clone the repo to a local folder and open in the Terminal.
-- Access your repositories via `gmy`. (Limited to the 100 repos last updated.)
+- Access your repositories via `gmy`.
 	* <kbd>⏎</kbd>: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
 	* <kbd>⌘⏎</kbd>: Open the repo's GitHub page.
