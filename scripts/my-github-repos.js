@@ -57,6 +57,7 @@ function run() {
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
+	const only100repos = $.getenv("only_100_recent_repos") === "1";
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -105,6 +106,7 @@ function run() {
 		console.log(`repos page #${page}: ${reposOfPage.length}`);
 		allRepos.push(...reposOfPage);
 		page++;
+		if (only100repos) break; // PERF only one request when user enabled this
 		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
 	}
 

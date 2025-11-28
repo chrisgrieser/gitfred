@@ -2112,13 +2112,32 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>use Alfred knowledge</string>
 			</dict>
 			<key>description</key>
-			<string>The search lists your 100 most recent repos, sorted by last updated time. If enabled, will also use Alfred knowledge (recent &amp; frequent use) to sort the repos.</string>
+			<string>The search lists your repos sorted by last updated time. If enabled, will also use Alfred knowledge (recent &amp; frequent use) to sort the repos.</string>
 			<key>label</key>
-			<string>Personal repos order</string>
+			<string>Personal repos</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>use_alfred_frecency</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>limit to 100 repos</string>
+			</dict>
+			<key>description</key>
+			<string>Limit the search for personal repos to the 100 most recently modified ones. If you have more than 100 repos, enabling this improves performance.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>only_100_recent_repos</string>
 		</dict>
 		<dict>
 			<key>config</key>
