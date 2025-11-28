@@ -22,7 +22,7 @@ function httpRequestWithHeaders(url, header) {
 		allHeaders += ` -H "${line}"`;
 	}
 	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
-	console.log("curl command:", curlRequest);
+	console.log(curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -34,10 +34,13 @@ function shortNumber(starcount) {
 }
 
 function getGithubToken() {
-	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenShellCmd = $.getenv("github_token_shell_cmd");
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
-	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken && tokenShellCmd) {
+		githubToken = app.doShellScript(tokenShellCmd + " || true").trim();
+		if (!githubToken) console.log("GitHub token shell command failed.");
+	}
 	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
 	return githubToken;
 }
@@ -99,6 +102,7 @@ function run() {
 			return JSON.stringify({ items: [item] });
 		}
 		const reposOfPage = JSON.parse(response);
+		console.log(`repos page #${page}: ${reposOfPage.length}`);
 		allRepos.push(...reposOfPage);
 		page++;
 		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
