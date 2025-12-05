@@ -57,7 +57,6 @@ function run() {
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
-	const only100repos = $.getenv("only_100_recent_repos") === "1";
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -93,23 +92,70 @@ function run() {
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
-	// Paginate through all repos
-	/** @type {GithubRepo[]} */
-	const allRepos = [];
-	let page = 1;
-	while (true) {
-		const response = httpRequestWithHeaders(apiUrl + `&page=${page}`, headers);
-		if (!response) {
-			const item = { title: "No response from GitHub. Try again later.", valid: false };
-			return JSON.stringify({ items: [item] });
-		}
-		const reposOfPage = JSON.parse(response);
-		console.log(`repos page #${page}: ${reposOfPage.length}`);
-		allRepos.push(...reposOfPage);
-		page++;
-		if (only100repos) break; // PERF only one request when user enabled this
-		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
+	// Fetch first page to get total count
+	const firstPageResponse = httpRequestWithHeaders(apiUrl + `&page=1`, headers);
+	if (!firstPageResponse) {
+		const item = {
+			title: "No response from GitHub. Try again later.",
+			valid: false,
+		};
+		return JSON.stringify({ items: [item] });
 	}
+	const firstPage = JSON.parse(firstPageResponse);
+	console.log(`Page 1: ${firstPage.length} repos`);
+
+	const allRepos = [...firstPage];
+
+	// If there are more pages, fetch them in parallel
+	if (firstPage.length === 100) {
+		// Estimate total pages needed (we'll fetch up to 10 pages in parallel)
+		// GitHub limits to 100 per page, so 6 pages = 600 repos max
+		const maxPages = 10;
+		const pages = [];
+
+		for (let page = 2; page <= maxPages; page++) {
+			pages.push(page);
+		}
+
+		// Build parallel curl commands
+		const tempDir = app.doShellScript("mktemp -d");
+		let curlCommands = "";
+
+		for (const page of pages) {
+			let allHeaders = "";
+			for (const line of headers) {
+				allHeaders += ` -H "${line}"`;
+			}
+			const outputFile = `${tempDir}/page_${page}.json`;
+			curlCommands += `curl --silent --location ${allHeaders} "${apiUrl}&page=${page}" > "${outputFile}" & `;
+		}
+		curlCommands += "wait"; // Wait for all background processes to complete
+
+		console.log(`Fetching pages 2-${maxPages} in parallel...`);
+		app.doShellScript(curlCommands);
+
+		// Read and parse all results
+		for (const page of pages) {
+			const outputFile = `${tempDir}/page_${page}.json`;
+			try {
+				const pageContent = app.doShellScript(`cat "${outputFile}"`);
+				if (pageContent) {
+					const reposOfPage = JSON.parse(pageContent);
+					console.log(`Page ${page}: ${reposOfPage.length} repos`);
+					if (reposOfPage.length === 0) break;
+					allRepos.push(...reposOfPage);
+					if (reposOfPage.length < 100) break; // Last page
+				}
+			} catch (error) {
+				console.log(`Error reading page ${page}: ${error}`);
+			}
+		}
+
+		// Cleanup temp files
+		app.doShellScript(`rm -rf "${tempDir}"`);
+	}
+
+	console.log(`🪚 Total repos fetched: ${allRepos.length}`);
 
 	// Create items for Alfred
 	const repos = allRepos
