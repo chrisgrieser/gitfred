@@ -108,9 +108,9 @@ function run() {
 
 	// If there are more pages, fetch them in parallel
 	if (firstPage.length === 100) {
-		// Estimate total pages needed (we'll fetch up to 10 pages in parallel)
+		// Estimate total pages needed (we'll fetch up to 100 pages in parallel)
 		// GitHub limits to 100 per page, so 6 pages = 600 repos max
-		const maxPages = 10;
+		const maxPages = 100;
 		const pages = [];
 
 		for (let page = 2; page <= maxPages; page++) {
