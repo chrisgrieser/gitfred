@@ -52,7 +52,7 @@ Helpful GitHub assistant for Alfred.
   a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
-## GitHub Token
+## GitHub token
 The `GITHUB_TOKEN` is optional and only required for showing notifications,
 private repos, PRs, and issues repos. The token requires the respective access
 rights.
