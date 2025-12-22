@@ -68,10 +68,10 @@ function run(argv) {
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
-	// GUARD errors like invalid API token
+	// GUARD errors like invalid API token or rate limit
 	const responseObj = JSON.parse(response);
 	if (responseObj.message) {
-		const item = { title: "Error", subtitle: responseObj.message, valid: false };
+		const item = { title: "Request denied.", subtitle: responseObj.message, valid: false };
 		return JSON.stringify({ items: [item] });
 	}
 
@@ -79,7 +79,6 @@ function run(argv) {
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
-	const shallowClone = cloneDepth > 0;
 
 	/** @type {AlfredItem[]} */
 	const repos = responseObj.items.map((/** @type {GithubRepo} */ repo) => {
@@ -100,7 +99,7 @@ function run(argv) {
 			.filter(Boolean)
 			.join("  ·  ");
 
-		let cloneSubtitle = shallowClone ? `⌃: Shallow Clone (depth ${cloneDepth})` : "⌃: Clone";
+		let cloneSubtitle = cloneDepth > 0 ? `⌃: Shallow Clone (depth ${cloneDepth})` : "⌃: Clone";
 		if (forkOnClone) cloneSubtitle += " & Fork";
 
 		const secondUrl = repo.homepage || repo.html_url + "/releases";
