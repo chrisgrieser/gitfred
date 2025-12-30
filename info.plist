@@ -2164,7 +2164,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>5</integer>
+				<integer>10</integer>
 				<key>markercount</key>
 				<integer>21</integer>
 				<key>maxvalue</key>
@@ -2278,7 +2278,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
+				<true/>
 				<key>required</key>
 				<false/>
 				<key>text</key>
