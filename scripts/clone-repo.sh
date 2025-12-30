@@ -97,10 +97,21 @@ elif [[ "$restore_mtime" == "slow-full" ]]; then
 	done
 fi
 
+# SETUP LOCAL BRANCHES
+# useful to have them available as completion via e.g., for `git switch`
+if [[ "$create_local_branches_on_clone" == "1" ]]; then # Alfred stores checkbox settings as `"1"` or `"0"` (stringified)
+	remote_branches=$(git for-each-ref --format='%(refname:short)' refs/remotes/origin/ |
+		grep --invert-match '^origin$')
+	echo "$remote_branches" | while read -r ref; do
+		local_branch="${ref#origin/}"
+		git branch --track "$local_branch" "$ref" &> /dev/null
+	done
+fi
+
 #───────────────────────────────────────────────────────────────────────────────
 # FORKING
 
-# INFO Alfred stores checkbox settings as `"1"` or `"0"` (stringified)
+# Alfred stores checkbox settings as `"1"` or `"0"` (stringified)
 if [[ "$github_username" != "$owner" && "$fork_on_clone" == "1" ]]; then
 
 	if [[ ! -x "$(command -v gh)" ]]; then

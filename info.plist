@@ -2051,7 +2051,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>issues</string>
 			</dict>
 			<key>description</key>
-			<string>Including private repos/issues/PRs slows down the search and also requires a GitHub token.</string>
+			<string>Including private repos/issues/PRs slows down the respective search and also requires a GitHub token.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2235,6 +2235,25 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>restore_mtime</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>create local branches</string>
+			</dict>
+			<key>description</key>
+			<string>For each branch at origin, create the corresponding local branch. This makes all branches available for tab-completion on commands like `git switch`.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>create_local_branches_on_clone</string>
 		</dict>
 		<dict>
 			<key>config</key>
