@@ -133,29 +133,9 @@ function run() {
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
-	// Fetch repos - either single page or all pages in parallel
-	/** @type {GithubRepo[]} */
-	const allRepos = [];
-
-	if (only100repos) {
-		// Single page fetch
-		const response = httpRequestWithHeaders(apiUrl + "&page=1", headers);
-		if (!response) {
-			const item = { title: "No response from GitHub. Try again later.", valid: false };
-			return JSON.stringify({ items: [item] });
-		}
-		const reposOfPage = JSON.parse(response);
-		if (reposOfPage.message) {
-			const item = {
-				title: "GitHub denied request.",
-				subtitle: reposOfPage.message,
-				valid: false,
-			};
-			return JSON.stringify({ items: [item] });
-		}
-		console.log(`repos page #1: ${reposOfPage.length}`);
-		allRepos.push(...reposOfPage);
-	} else {
+	// Determine max pages to fetch
+	let maxPages = 1;
+	if (!only100repos) {
 		// Get repo count from user API and orgs to determine pages needed
 		// DOCS https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28
 		const userResponse = httpRequestWithHeaders("https://api.github.com/user", headers);
@@ -181,37 +161,39 @@ function run() {
 
 		// This is a ceiling since org counts include all org repos, not just
 		// those accessible via /user/repos. A few extra empty pages is acceptable.
-		const maxPages = Math.ceil(totalRepos / 100) || 1;
+		maxPages = Math.ceil(totalRepos / 100) || 1;
 		console.log(`Up to ${totalRepos} repos across max ${maxPages} pages`);
+	}
 
-		// Fetch all pages in parallel
-		const urls = [];
-		for (let page = 1; page <= maxPages; page++) {
-			urls.push(apiUrl + `&page=${page}`);
-		}
+	// Fetch all pages in parallel
+	const urls = [];
+	for (let page = 1; page <= maxPages; page++) {
+		urls.push(apiUrl + `&page=${page}`);
+	}
 
-		const responses = httpRequestsInParallel(urls, headers);
-		for (let i = 0; i < responses.length; i++) {
-			const response = responses[i];
-			if (!response) continue;
-			try {
-				const repos = JSON.parse(response);
-				if (repos.message) {
-					if (i === 0) {
-						const item = {
-							title: "GitHub denied request.",
-							subtitle: repos.message,
-							valid: false,
-						};
-						return JSON.stringify({ items: [item] });
-					}
-					continue;
+	/** @type {GithubRepo[]} */
+	const allRepos = [];
+	const responses = httpRequestsInParallel(urls, headers);
+	for (let i = 0; i < responses.length; i++) {
+		const response = responses[i];
+		if (!response) continue;
+		try {
+			const reposOfPage = JSON.parse(response);
+			if (reposOfPage.message) {
+				if (i === 0) {
+					const item = {
+						title: "GitHub denied request.",
+						subtitle: reposOfPage.message,
+						valid: false,
+					};
+					return JSON.stringify({ items: [item] });
 				}
-				console.log(`repos page #${i + 1}: ${repos.length}`);
-				allRepos.push(...repos);
-			} catch (_e) {
-				// Skip invalid JSON responses
+				continue;
 			}
+			console.log(`repos page #${i + 1}: ${reposOfPage.length}`);
+			allRepos.push(...reposOfPage);
+		} catch (_e) {
+			// Skip invalid JSON responses
 		}
 	}
 
