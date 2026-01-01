@@ -26,6 +26,47 @@ function httpRequestWithHeaders(url, header) {
 	return app.doShellScript(curlRequest);
 }
 
+/**
+ * Fetch multiple URLs in parallel using background curl processes
+ * @param {string[]} urls
+ * @param {string[]} header
+ * @return {string[]} array of response bodies in same order as urls
+ */
+function httpRequestsInParallel(urls, header) {
+	if (urls.length === 0) return [];
+
+	let allHeaders = "";
+	for (const line of header) {
+		allHeaders += ` -H "${line}"`;
+	}
+
+	const tmpDir = app.doShellScript("mktemp -d");
+
+	// Build parallel curl commands that write to numbered files
+	const curlCommands = urls
+		.map((url, i) => `curl --silent --location ${allHeaders} "${url}" > "${tmpDir}/${i}.json" &`)
+		.join("\n");
+
+	// Run all curls in parallel and wait for completion
+	const script = `${curlCommands}\nwait`;
+	console.log(`Fetching ${urls.length} pages in parallel...`);
+	app.doShellScript(script);
+
+	// Read results in order
+	const results = urls.map((_, i) => {
+		try {
+			return app.doShellScript(`cat "${tmpDir}/${i}.json"`);
+		} catch (_e) {
+			return "[]";
+		}
+	});
+
+	// Cleanup
+	app.doShellScript(`rm -rf "${tmpDir}"`);
+
+	return results;
+}
+
 /** @param {number} starcount */
 function shortNumber(starcount) {
 	const starStr = starcount.toString();
@@ -92,30 +133,86 @@ function run() {
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
-	// Paginate through all repos
+	// Fetch repos - either single page or all pages in parallel
 	/** @type {GithubRepo[]} */
 	const allRepos = [];
-	let page = 1;
-	while (true) {
-		const response = httpRequestWithHeaders(apiUrl + `&page=${page}`, headers);
+
+	if (only100repos) {
+		// Single page fetch
+		const response = httpRequestWithHeaders(apiUrl + "&page=1", headers);
 		if (!response) {
 			const item = { title: "No response from GitHub. Try again later.", valid: false };
 			return JSON.stringify({ items: [item] });
 		}
-		const reposOfPage = JSON.parse(response);
-		if (reposOfPage.message) {
+		const repos = JSON.parse(response);
+		if (repos.message) {
 			const item = {
 				title: "GitHub denied request.",
-				subtitle: reposOfPage.message,
+				subtitle: repos.message,
 				valid: false,
 			};
 			return JSON.stringify({ items: [item] });
 		}
-		console.log(`repos page #${page}: ${reposOfPage.length}`);
-		allRepos.push(...reposOfPage);
-		page++;
-		if (only100repos) break; // PERF only one request when user enabled this
-		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
+		console.log(`repos page #1: ${repos.length}`);
+		allRepos.push(...repos);
+	} else {
+		// Get repo count from user API and orgs to determine pages needed
+		// DOCS https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28
+		const userResponse = httpRequestWithHeaders("https://api.github.com/user", headers);
+		const userData = JSON.parse(userResponse || "{}");
+		let totalRepos = (userData.public_repos || 0) + (userData.total_private_repos || 0);
+
+		// Get orgs and their repo counts
+		// DOCS https://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28
+		const orgsResponse = httpRequestWithHeaders("https://api.github.com/user/orgs", headers);
+		const orgs = JSON.parse(orgsResponse || "[]");
+		if (Array.isArray(orgs) && orgs.length > 0) {
+			const orgUrls = orgs.map((org) => `https://api.github.com/orgs/${org.login}`);
+			const orgResponses = httpRequestsInParallel(orgUrls, headers);
+			for (const orgResponse of orgResponses) {
+				try {
+					const orgData = JSON.parse(orgResponse || "{}");
+					totalRepos += (orgData.public_repos || 0) + (orgData.total_private_repos || 0);
+				} catch (_e) {
+					// Skip invalid responses
+				}
+			}
+		}
+
+		// This may over-estimate since org counts include all org repos, not just
+		// those accessible via /user/repos.
+		const estimatedPages = Math.ceil(totalRepos / 100) || 1;
+		console.log(`Estimated ${totalRepos} repos across ${estimatedPages} pages`);
+
+		// Fetch all pages in parallel
+		const urls = [];
+		for (let page = 1; page <= estimatedPages; page++) {
+			urls.push(apiUrl + `&page=${page}`);
+		}
+
+		const responses = httpRequestsInParallel(urls, headers);
+		for (let i = 0; i < responses.length; i++) {
+			const response = responses[i];
+			if (!response) continue;
+			try {
+				const repos = JSON.parse(response);
+				if (repos.message) {
+					if (i === 0) {
+						const item = {
+							title: "GitHub denied request.",
+							subtitle: repos.message,
+							valid: false,
+						};
+						return JSON.stringify({ items: [item] });
+					}
+					continue;
+				}
+				console.log(`repos page #${i + 1}: ${repos.length}`);
+				allRepos.push(...repos);
+			} catch (_e) {
+				// Skip invalid JSON responses
+			}
+		}
 	}
 
 	// Create items for Alfred
