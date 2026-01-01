@@ -144,17 +144,17 @@ function run() {
 			const item = { title: "No response from GitHub. Try again later.", valid: false };
 			return JSON.stringify({ items: [item] });
 		}
-		const repos = JSON.parse(response);
-		if (repos.message) {
+		const reposOfPage = JSON.parse(response);
+		if (reposOfPage.message) {
 			const item = {
 				title: "GitHub denied request.",
-				subtitle: repos.message,
+				subtitle: reposOfPage.message,
 				valid: false,
 			};
 			return JSON.stringify({ items: [item] });
 		}
-		console.log(`repos page #1: ${repos.length}`);
-		allRepos.push(...repos);
+		console.log(`repos page #1: ${reposOfPage.length}`);
+		allRepos.push(...reposOfPage);
 	} else {
 		// Get repo count from user API and orgs to determine pages needed
 		// DOCS https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28
