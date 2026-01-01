@@ -179,14 +179,14 @@ function run() {
 			}
 		}
 
-		// This may over-estimate since org counts include all org repos, not just
-		// those accessible via /user/repos.
-		const estimatedPages = Math.ceil(totalRepos / 100) || 1;
-		console.log(`Estimated ${totalRepos} repos across ${estimatedPages} pages`);
+		// This is a ceiling since org counts include all org repos, not just
+		// those accessible via /user/repos. A few extra empty pages is acceptable.
+		const maxPages = Math.ceil(totalRepos / 100) || 1;
+		console.log(`Up to ${totalRepos} repos across max ${maxPages} pages`);
 
 		// Fetch all pages in parallel
 		const urls = [];
-		for (let page = 1; page <= estimatedPages; page++) {
+		for (let page = 1; page <= maxPages; page++) {
 			urls.push(apiUrl + `&page=${page}`);
 		}
 
