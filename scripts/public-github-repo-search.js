@@ -6,10 +6,7 @@ app.includeStandardAdditions = true;
 
 function getApiBaseUrl() {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	if (enterpriseUrl) {
-		return `https://${enterpriseUrl}/api/v3`;
-	}
-	return "https://api.github.com";
+	return isEnterprise() && getGithubToken() ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 function isEnterprise() {
@@ -103,13 +100,8 @@ function run(argv) {
 
 	// Enterprise requires authentication
 	let response;
-	if (isEnterprise()) {
-		const githubToken = getGithubToken();
-		if (!githubToken) {
-			return JSON.stringify({
-				items: [{ title: "⚠️ No $GITHUB_TOKEN found.", subtitle: "Enterprise requires authentication.", valid: false }],
-			});
-		}
+	const githubToken = getGithubToken();
+	if (isEnterprise() && githubToken) {
 		const headers = [
 			"Accept: application/vnd.github.json",
 			"X-GitHub-Api-Version: 2022-11-28",

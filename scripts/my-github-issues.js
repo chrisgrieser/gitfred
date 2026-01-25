@@ -4,12 +4,13 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function isEnterprise() {
+	return Boolean($.getenv("github_enterprise_url")?.trim());
+}
+
 function getApiBaseUrl() {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	if (enterpriseUrl) {
-		return `https://${enterpriseUrl}/api/v3`;
-	}
-	return "https://api.github.com";
+	return isEnterprise() && getGithubToken() ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 /** @param {string} str */
@@ -58,7 +59,7 @@ function run() {
 	const issuesToSearch = 50; // up to 100, for performance set lower
 	const apiUrl = `${getApiBaseUrl()}/search/issues?q=involves:${username}&sort=updated&per_page=${issuesToSearch}`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
-	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
+	if (githubToken && (includePrivate || isEnterprise())) headers.push(`Authorization: BEARER ${githubToken}`);
 	const response = httpRequestWithHeaders(apiUrl, headers);
 
 	// GUARD no response
