@@ -4,6 +4,14 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function getApiBaseUrl() {
+	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
+	if (enterpriseUrl) {
+		return `https://${enterpriseUrl}/api/v3`;
+	}
+	return "https://api.github.com";
+}
+
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-_.]/g, " ");
@@ -83,12 +91,13 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// FETCH REMOTE REPOS
 
+	const apiBase = getApiBaseUrl();
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-	let apiUrl = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	let apiUrl = `${apiBase}/users/${username}/repos?type=all&per_page=100&sort=updated`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken && includePrivate) {
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
-		apiUrl = "https://api.github.com/user/repos?per_page=100&sort=updated";
+		apiUrl = `${apiBase}/user/repos?per_page=100&sort=updated`;
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 

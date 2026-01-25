@@ -4,6 +4,14 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function getApiBaseUrl() {
+	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
+	if (enterpriseUrl) {
+		return `https://${enterpriseUrl}/api/v3`;
+	}
+	return "https://api.github.com";
+}
+
 /**
  * @param {string} url
  * @param {string[]} header
@@ -78,7 +86,7 @@ function run() {
 
 	// CALL GITHUB API
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
-	const apiUrl = "https://api.github.com/notifications?all=" + showReadNotifs.toString();
+	const apiUrl = getApiBaseUrl() + "/notifications?all=" + showReadNotifs.toString();
 	const headers = [
 		"Accept: application/vnd.github.json",
 		"X-GitHub-Api-Version: 2022-11-28",

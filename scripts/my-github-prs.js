@@ -4,6 +4,14 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function getApiBaseUrl() {
+	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
+	if (enterpriseUrl) {
+		return `https://${enterpriseUrl}/api/v3`;
+	}
+	return "https://api.github.com";
+}
+
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
@@ -75,7 +83,7 @@ function run() {
 	const githubToken = getGithubToken();
 	const includePrivate = $.getenv("include_private_prs") === "1";
 	const username = $.getenv("github_username");
-	const apiUrl = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
+	const apiUrl = `${getApiBaseUrl()}/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
 

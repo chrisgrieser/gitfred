@@ -1,12 +1,52 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
+
+function getApiBaseUrl() {
+	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
+	if (enterpriseUrl) {
+		return `https://${enterpriseUrl}/api/v3`;
+	}
+	return "https://api.github.com";
+}
+
+function isEnterprise() {
+	return Boolean($.getenv("github_enterprise_url")?.trim());
+}
+
+function getGithubToken() {
+	const tokenShellCmd = $.getenv("github_token_shell_cmd");
+	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
+	if (!githubToken && tokenShellCmd) {
+		githubToken = app.doShellScript(tokenShellCmd + " || true").trim();
+		if (!githubToken) console.log("GitHub token shell command failed.");
+	}
+	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
+	return githubToken;
+}
 
 /** @param {string} url */
 function httpRequest(url) {
 	const queryUrl = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+}
+
+/**
+ * @param {string} url
+ * @param {string[]} headers
+ */
+function httpRequestWithHeaders(url, headers) {
+	let allHeaders = "";
+	for (const line of headers) {
+		allHeaders += ` -H "${line}"`;
+	}
+	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log(curlRequest);
+	return app.doShellScript(curlRequest);
 }
 
 /** @param {string} isoDateStr */
@@ -59,8 +99,26 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	const apiUrl = "https://api.github.com/search/repositories?q=" + encodeURIComponent(query);
-	const response = httpRequest(apiUrl);
+	const apiUrl = getApiBaseUrl() + "/search/repositories?q=" + encodeURIComponent(query);
+
+	// Enterprise requires authentication
+	let response;
+	if (isEnterprise()) {
+		const githubToken = getGithubToken();
+		if (!githubToken) {
+			return JSON.stringify({
+				items: [{ title: "⚠️ No $GITHUB_TOKEN found.", subtitle: "Enterprise requires authentication.", valid: false }],
+			});
+		}
+		const headers = [
+			"Accept: application/vnd.github.json",
+			"X-GitHub-Api-Version: 2022-11-28",
+			`Authorization: BEARER ${githubToken}`,
+		];
+		response = httpRequestWithHeaders(apiUrl, headers);
+	} else {
+		response = httpRequest(apiUrl);
+	}
 
 	// GUARD no response
 	if (!response) {
