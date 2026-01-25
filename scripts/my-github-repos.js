@@ -8,9 +8,12 @@ function isEnterprise() {
 	return Boolean($.getenv("github_enterprise_url")?.trim());
 }
 
-function getApiBaseUrl() {
+/**
+ * @param {string} token
+ */
+function getApiBaseUrl(token) {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	return isEnterprise() && getGithubToken() ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
+	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 /** @param {string} str */
@@ -92,7 +95,7 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// FETCH REMOTE REPOS
 
-	const apiBase = getApiBaseUrl();
+	const apiBase = getApiBaseUrl(githubToken);
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	let apiUrl = `${apiBase}/users/${username}/repos?type=all&per_page=100&sort=updated`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];

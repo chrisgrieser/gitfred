@@ -8,11 +8,7 @@ token=$github_token_from_alfred_prefs
 [[ -z "$token" ]] && token=$GITHUB_TOKEN
 
 # Determine GitHub host (github.com or enterprise)
-if [[ -n "$github_enterprise_url" ]]; then
-	github_host="$github_enterprise_url"
-else
-	github_host="github.com"
-fi
+github_host="${github_enterprise_url:-github.com}"
 
 #────────────────────────────────────────────────────────────────────────────
 
@@ -21,11 +17,7 @@ if [[ "$mode" == "read" || "$mode" == "done" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read
 	method=$([[ "$mode" == "read" ]] && echo "PATCH" || echo "DELETE")
 	thread_id="$1"
-	if [[ -n "$github_enterprise_url" ]]; then
-		api_base="https://${github_enterprise_url}/api/v3"
-	else
-		api_base="https://api.github.com"
-	fi
+	api_base=$([[ -n "$github_enterprise_url" ]] && echo "https://${github_enterprise_url}/api/v3" || echo "https://api.github.com")
 	curl --silent --location \
 		--request "$method" \
 		-H "Accept: application/vnd.github+json" \

@@ -8,9 +8,12 @@ function isEnterprise() {
 	return Boolean($.getenv("github_enterprise_url")?.trim());
 }
 
-function getApiBaseUrl() {
+/**
+ * @param {string} token
+ */
+function getApiBaseUrl(token) {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	return isEnterprise() && getGithubToken() ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
+	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 /**
@@ -87,7 +90,7 @@ function run() {
 
 	// CALL GITHUB API
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
-	const apiUrl = getApiBaseUrl() + "/notifications?all=" + showReadNotifs.toString();
+	const apiUrl = getApiBaseUrl(githubToken) + "/notifications?all=" + showReadNotifs.toString();
 	const headers = [
 		"Accept: application/vnd.github.json",
 		"X-GitHub-Api-Version: 2022-11-28",
