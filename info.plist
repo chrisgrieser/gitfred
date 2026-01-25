@@ -2015,7 +2015,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>For GitHub Enterprise. If empty, uses github.com. Enter just the hostname (without https://).</string>
+			<string>For GitHub Enterprise. If empty, uses github.com. Enter just the hostname (without https://). Note: Cloning with enterprise URLs uses https, not ssh. Using enterprise URLs requires a token to be set.</string>
 			<key>label</key>
 			<string>GitHub Enterprise URL (optional)</string>
 			<key>type</key>
