@@ -1,7 +1,4 @@
-<!-- LTeX: enabled=false -->
-
 # Alfred GitFred
-<!-- LTeX: enabled=true -->
 ![GitHub downloads](https://img.shields.io/github/downloads/chrisgrieser/gitfred/total?label=GitHub%20Downloads&style=plastic&logo=github)
 ![Alfred Gallery downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-gallery-downloads.yaml&query=gitfred&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)
 ![Version number](https://img.shields.io/github/v/release/chrisgrieser/gitfred?label=Latest%20Release&style=plastic)
@@ -54,19 +51,14 @@ Helpful GitHub assistant for Alfred.
 
 ## GitHub token
 The `GITHUB_TOKEN` is optional and only required for showing notifications,
-private repos, PRs, and issues repos. The token requires the respective access
-rights.
-
-Note that other than for notifications, the workflow does not use the token by
-default, since including private noticeably slows down the search. To search
-private repos, PRs, and issues, you also need to enable the respective workflow
-setting.
+including private repos/PRs/issues, or when using an enterprise URL. The token
+naturally requires the respective access rights.
 
 The workflow will check for the token in the following order:
 1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
 2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
    $HOME/my_token.txt`, defined in your workflow settings.
-3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
+3. A token exported in your `~/.zshenv` via `export GITHUB_TOKEN=…`.
 
 ## Installation
 [➡️ Download the latest release.](https://github.com/chrisgrieser/gitfred/releases/latest)
