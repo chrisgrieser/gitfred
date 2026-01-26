@@ -1,0 +1,16 @@
+name: Biome check
+
+on:
+  pull_request:
+    paths: ["**.js"]
+  push:
+    paths: ["**.js", "biome.jsonc"]
+
+jobs:
+  biome-check:
+    name: Biome check
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: biomejs/setup-biome@v2
+      - run: biome ci
