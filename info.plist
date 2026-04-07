@@ -1507,7 +1507,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
+				<string>./scripts/post-notification-change-hook.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1563,21 +1563,16 @@ Including private repos/PRs/issues now also requires explicitly enabling them in
   a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
-## GitHub Token
+## GitHub token
 The `GITHUB_TOKEN` is optional and only required for showing notifications,
-private repos, PRs, and issues repos. The token requires the respective access
-rights.
-
-Note that other than for notifications, the workflow does not use the token by
-default, since including private noticeably slows down the search. To search
-private repos, PRs, and issues, you also need to enable the respective workflow
-setting.
+including private repos/PRs/issues, or when using an enterprise URL. The token
+naturally requires the respective access rights.
 
 The workflow will check for the token in the following order:
 1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
 2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
    $HOME/my_token.txt`, defined in your workflow settings.
-3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
+3. A token exported in your `~/.zshenv` via `export GITHUB_TOKEN=…`.
 
 ---
 
@@ -1645,7 +1640,7 @@ The workflow will check for the token in the following order:
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>update sketchybar component</string>
+			<string>post notification change hook</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
@@ -2341,6 +2336,27 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>URI to be triggered after changes of notification count. Leave empty to disable.</string>
+			<key>label</key>
+			<string>Post-notification-change hooks</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>uri_trigger</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
 				<string>update_notification_counter</string>
 				<key>required</key>
 				<false/>
@@ -2348,9 +2364,9 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>sketchybar users: Trigger to be executed after actioning a notification. Leave empty to disable.</string>
+			<string>Sketchybar: Trigger to update a menubar component after notification count changes. Leave empty to disable.</string>
 			<key>label</key>
-			<string>sketchybar trigger</string>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
